@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - InnovateSync</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/settings.css">
+    <link rel="stylesheet" href="../../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Logo Bar -->
+    <div class="top-logo-bar">
+        <a href="../../index.html" class="teams-logo-link" title="Home">
+            <svg class="teams-logo-small" viewBox="0 0 2228.833 2073.333" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(-5.5 -11.333)">
+                    <circle cx="1118.5" cy="1011.333" r="1011.333" fill="#5059c9"/>
+                    <path d="M1667.5 1011.333a549 549 0 1 1-549-549 549 549 0 0 1 549 549z" fill="#7b83eb"/>
+                    <circle cx="1118.5" cy="1011.333" r="440.583" fill="#fff"/>
+                    <path d="M1118.5 570.75v881.167" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M678.917 1011.333h881.166" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M1118.5 1451.917V2084.667" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M1118.5 1451.917h632.75" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <circle cx="1118.5" cy="1011.333" r="220.292" fill="#5059c9"/>
+                    <text x="1118.5" y="1150" font-family="Segoe UI, sans-serif" font-size="400" font-weight="600" fill="#fff" text-anchor="middle">T</text>
+                </g>
+            </svg>
+            <span class="teams-text">InnovateSync</span>
+        </a>
+    </div>
+
+    <!-- Left Navigation Rail -->
+    <nav class="nav-rail">
+        <div class="nav-rail-top">
+            <button class="nav-item" data-page="teams" title="Teams">
+                <i class="fas fa-users"></i>
+            </button>
+            <button class="nav-item" data-page="chat" title="Chat">
+                <i class="fas fa-comment"></i>
+            </button>
+            <button class="nav-item" data-page="calendar" title="Calendar">
+                <i class="fas fa-calendar"></i>
+            </button>
+            <button class="nav-item" data-page="calls" title="Calls">
+                <i class="fas fa-phone"></i>
+            </button>
+            <button class="nav-item" data-page="files" title="Files">
+                <i class="fas fa-folder"></i>
+            </button>
+        </div>
+        <div class="nav-rail-bottom">
+            <button class="nav-item" data-page="apps" title="Apps">
+                <i class="fas fa-th"></i>
+            </button>
+            <button class="nav-item active" data-page="settings" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="user-avatar">
+                <img src="https://ui-avatars.com/api/?name=User&background=6264a7&color=fff" alt="User">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar - Settings Navigation -->
+        <aside class="left-sidebar">
+            <div class="sidebar-header">
+                <h2>Settings</h2>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search settings">
+            </div>
+
+            <div class="settings-nav">
+                <div class="settings-section">
+                    <div class="settings-section-title">General</div>
+                    <button class="settings-nav-item active">
+                        <i class="fas fa-user"></i>
+                        <span>Account</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Privacy</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-palette"></i>
+                        <span>Appearance</span>
+                    </button>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-title">Communication</div>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-video"></i>
+                        <span>Devices</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Calls</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-comment"></i>
+                        <span>Messaging</span>
+                    </button>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-section-title">App settings</div>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-language"></i>
+                        <span>Language</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-download"></i>
+                        <span>Files</span>
+                    </button>
+                    <button class="settings-nav-item">
+                        <i class="fas fa-keyboard"></i>
+                        <span>Keyboard shortcuts</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area - Settings Content -->
+        <main class="content-area">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="channel-info">
+                    <h1>Account</h1>
+                </div>
+            </header>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Profile Section -->
+                <section class="settings-card">
+                    <h2 class="settings-card-title">Profile</h2>
+                    <div class="settings-card-content">
+                        <div class="profile-section">
+                            <div class="profile-avatar-container">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6264a7&color=fff&size=120" alt="Profile" class="profile-avatar-large">
+                                <button class="change-photo-btn">
+                                    <i class="fas fa-camera"></i>
+                                    Change photo
+                                </button>
+                            </div>
+                            <div class="profile-info">
+                                <div class="form-group">
+                                    <label>Display name</label>
+                                    <input type="text" value="John Doe" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" value="john.doe@innovatesync.com" class="form-input" disabled>
+                                    <span class="form-hint">Your email cannot be changed</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status message</label>
+                                    <input type="text" placeholder="What's your status?" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Presence Section -->
+                <section class="settings-card">
+                    <h2 class="settings-card-title">Presence</h2>
+                    <div class="settings-card-content">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-select">
+                                <option value="available">Available</option>
+                                <option value="busy">Busy</option>
+                                <option value="dnd">Do not disturb</option>
+                                <option value="away">Away</option>
+                                <option value="offline">Appear offline</option>
+                            </select>
+                        </div>
+                        <div class="toggle-group">
+                            <div class="toggle-info">
+                                <div class="toggle-label">Reset status</div>
+                                <div class="toggle-description">Automatically reset your status to Available</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="toggle-group">
+                            <div class="toggle-info">
+                                <div class="toggle-label">Show when people message me</div>
+                                <div class="toggle-description">Let people know when you're actively using Teams</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Information -->
+                <section class="settings-card">
+                    <h2 class="settings-card-title">Contact information</h2>
+                    <div class="settings-card-content">
+                        <div class="form-group">
+                            <label>Phone number</label>
+                            <input type="tel" placeholder="+1 (555) 000-0000" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" placeholder="City, Country" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label>Time zone</label>
+                            <select class="form-select">
+                                <option>(UTC-05:00) Eastern Time (US & Canada)</option>
+                                <option>(UTC-06:00) Central Time (US & Canada)</option>
+                                <option>(UTC-07:00) Mountain Time (US & Canada)</option>
+                                <option>(UTC-08:00) Pacific Time (US & Canada)</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Account Management -->
+                <section class="settings-card">
+                    <h2 class="settings-card-title">Account management</h2>
+                    <div class="settings-card-content">
+                        <button class="settings-action-btn">
+                            <i class="fas fa-key"></i>
+                            Change password
+                        </button>
+                        <button class="settings-action-btn">
+                            <i class="fas fa-shield-alt"></i>
+                            Two-factor authentication
+                        </button>
+                        <button class="settings-action-btn">
+                            <i class="fas fa-download"></i>
+                            Download your data
+                        </button>
+                        <button class="settings-action-btn danger">
+                            <i class="fas fa-trash"></i>
+                            Delete account
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Save Button -->
+                <div class="settings-footer">
+                    <button class="btn-secondary">Cancel</button>
+                    <button class="btn-primary">Save changes</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../scripts/main.js"></script>
+    <script src="../../scripts/settings.js"></script>
+</body>
+</html>

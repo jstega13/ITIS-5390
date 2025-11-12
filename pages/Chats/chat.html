@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - InnovateSync</title>
+    <link rel="stylesheet" href="../../styles/styles.css">
+    <link rel="stylesheet" href="../../styles/chat.css">
+    <link rel="stylesheet" href="../../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Logo Bar -->
+    <div class="top-logo-bar">
+        <a href="../../index.html" class="teams-logo-link" title="Home">
+            <svg class="teams-logo-small" viewBox="0 0 2228.833 2073.333" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(-5.5 -11.333)">
+                    <circle cx="1118.5" cy="1011.333" r="1011.333" fill="#5059c9"/>
+                    <path d="M1667.5 1011.333a549 549 0 1 1-549-549 549 549 0 0 1 549 549z" fill="#7b83eb"/>
+                    <circle cx="1118.5" cy="1011.333" r="440.583" fill="#fff"/>
+                    <path d="M1118.5 570.75v881.167" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M678.917 1011.333h881.166" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M1118.5 1451.917V2084.667" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <path d="M1118.5 1451.917h632.75" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
+                    <circle cx="1118.5" cy="1011.333" r="220.292" fill="#5059c9"/>
+                    <text x="1118.5" y="1150" font-family="Segoe UI, sans-serif" font-size="400" font-weight="600" fill="#fff" text-anchor="middle">T</text>
+                </g>
+            </svg>
+            <span class="teams-text">InnovateSync</span>
+        </a>
+    </div>
+
+    <!-- Left Navigation Rail -->
+    <nav class="nav-rail">
+        <div class="nav-rail-top">
+            <button class="nav-item" data-page="teams" title="Teams">
+                <i class="fas fa-users"></i>
+            </button>
+            <button class="nav-item active" data-page="chat" title="Chat">
+                <i class="fas fa-comment"></i>
+            </button>
+            <button class="nav-item" data-page="calendar" title="Calendar">
+                <i class="fas fa-calendar"></i>
+            </button>
+            <button class="nav-item" data-page="calls" title="Calls">
+                <i class="fas fa-phone"></i>
+            </button>
+            <button class="nav-item" data-page="files" title="Files">
+                <i class="fas fa-folder"></i>
+            </button>
+        </div>
+        <div class="nav-rail-bottom">
+            <button class="nav-item" data-page="apps" title="Apps">
+                <i class="fas fa-th"></i>
+            </button>
+            <button class="nav-item" data-page="settings" title="Settings">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="user-avatar">
+                <img src="https://ui-avatars.com/api/?name=User&background=6264a7&color=fff" alt="User">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar - Chat List -->
+        <aside class="left-sidebar">
+            <div class="sidebar-header">
+                <h2>Chat</h2>
+                <div class="sidebar-actions">
+                    <button class="icon-btn" title="New chat">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="icon-btn" title="Filter">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                    <button class="icon-btn" title="More options">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search chats">
+            </div>
+
+            <div class="chat-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Unread</button>
+                <button class="filter-btn">Meetings</button>
+            </div>
+
+            <div class="chats-list">
+                <div class="chat-item active">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">Sarah Johnson</span>
+                            <span class="chat-time">2:30 PM</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">Thanks for the update! I'll review...</span>
+                        </div>
+                    </div>
+                    <div class="chat-status online"></div>
+                </div>
+
+                <div class="chat-item unread">
+                    <img src="https://ui-avatars.com/api/?name=Michael+Chen&background=6264a7&color=fff" alt="Michael Chen" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">Michael Chen</span>
+                            <span class="chat-time">1:15 PM</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">Can we schedule a quick call?</span>
+                            <span class="unread-badge">2</span>
+                        </div>
+                    </div>
+                    <div class="chat-status online"></div>
+                </div>
+
+                <div class="chat-item">
+                    <img src="https://ui-avatars.com/api/?name=Emily+Rodriguez&background=c239b3&color=fff" alt="Emily Rodriguez" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">Emily Rodriguez</span>
+                            <span class="chat-time">Yesterday</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">The designs look great! 🎨</span>
+                        </div>
+                    </div>
+                    <div class="chat-status away"></div>
+                </div>
+
+                <div class="chat-item">
+                    <img src="https://ui-avatars.com/api/?name=David+Kim&background=00a4ef&color=fff" alt="David Kim" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">David Kim</span>
+                            <span class="chat-time">Yesterday</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">You: Perfect, see you then!</span>
+                        </div>
+                    </div>
+                    <div class="chat-status offline"></div>
+                </div>
+
+                <div class="chat-item">
+                    <div class="group-avatar">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">Design Team</span>
+                            <span class="chat-time">2 days ago</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">Emily: I've uploaded the mockups</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-item">
+                    <img src="https://ui-avatars.com/api/?name=Lisa+Wang&background=ff8c00&color=fff" alt="Lisa Wang" class="chat-avatar">
+                    <div class="chat-info">
+                        <div class="chat-header">
+                            <span class="chat-name">Lisa Wang</span>
+                            <span class="chat-time">3 days ago</span>
+                        </div>
+                        <div class="chat-preview">
+                            <span class="chat-message">Thanks for your help!</span>
+                        </div>
+                    </div>
+                    <div class="chat-status online"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area - Chat Conversation -->
+        <main class="content-area">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="channel-info">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="top-bar-avatar">
+                    <div>
+                        <h1>Sarah Johnson</h1>
+                        <span class="channel-description">
+                            <span class="status-indicator online"></span>
+                            Available
+                        </span>
+                    </div>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="icon-btn" title="Video call">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="icon-btn" title="Audio call">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button class="icon-btn" title="Screen share">
+                        <i class="fas fa-desktop"></i>
+                    </button>
+                    <button class="icon-btn" title="Add people">
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                    <button class="icon-btn" title="More options">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Messages Area -->
+            <div class="messages-container">
+                <div class="date-divider">
+                    <span>Today</span>
+                </div>
+
+                <div class="message received">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">Sarah Johnson</span>
+                            <span class="message-time">9:30 AM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Hey! Did you get a chance to review the project proposal I sent yesterday?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-time">9:45 AM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Yes, I went through it this morning. Overall it looks really solid! I have a few suggestions for the timeline section.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-time">9:46 AM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Would you be available for a quick call this afternoon to discuss?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">Sarah Johnson</span>
+                            <span class="message-time">10:15 AM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Absolutely! I'm free after 2 PM. What time works best for you?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message sent">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-time">10:20 AM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>How about 2:30 PM? I'll send a meeting invite.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message received">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">Sarah Johnson</span>
+                            <span class="message-time">2:30 PM</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Thanks for the update! I'll review the changes you mentioned and get back to you by end of day.</p>
+                        </div>
+                        <div class="message-reactions">
+                            <button class="reaction">👍 1</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compose Box -->
+            <div class="compose-box">
+                <div class="compose-header">
+                    <button class="compose-format-btn" title="Format">
+                        <i class="fas fa-font"></i>
+                    </button>
+                    <button class="compose-format-btn" title="Attach file">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="compose-format-btn" title="Emoji">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <button class="compose-format-btn" title="GIF">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button class="compose-format-btn" title="Sticker">
+                        <i class="fas fa-sticky-note"></i>
+                    </button>
+                </div>
+                <textarea class="compose-input" placeholder="Type a message"></textarea>
+                <div class="compose-footer">
+                    <div class="compose-actions-left">
+                        <button class="icon-btn-small" title="Bold">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                        <button class="icon-btn-small" title="Italic">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                        <button class="icon-btn-small" title="Underline">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                        <button class="icon-btn-small" title="Link">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
+                    <button class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../scripts/main.js"></script>
+    <script src="../../scripts/chat.js"></script>
+</body>
+</html>
