@@ -1,5 +1,9 @@
 /* Chat-specific styles */
 
+* {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
 /* Chat Filters */
 .chat-filters {
     display: flex;

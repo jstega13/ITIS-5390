@@ -1,4 +1,8 @@
-* Settings-specific styles */
+/* Settings-specific styles */
+
+* {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+}
 
 /* Settings Navigation */
 .settings-nav {

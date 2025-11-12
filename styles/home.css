@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
 /* Top Logo Bar */
@@ -51,7 +52,6 @@ body {
     height: calc(100vh - 48px);
 }
 
-/* Home Container */
 .home-container {
     margin-left: 64px;
     margin-top: 48px;
@@ -60,6 +60,7 @@ body {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #f3f2f1 0%, #e8e6e4 100%);
+}
 }
 
 .home-content {

@@ -3,63 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnovateSync - Home</title>
+    <title>Microsoft Teams - Home</title>
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Top Logo Bar -->
-    <div class="top-logo-bar">
-        <a href="index.html" class="teams-logo-link" title="Home">
-            <svg class="teams-logo-small" viewBox="0 0 2228.833 2073.333" xmlns="http://www.w3.org/2000/svg">
-                <g transform="translate(-5.5 -11.333)">
-                    <circle cx="1118.5" cy="1011.333" r="1011.333" fill="#5059c9"/>
-                    <path d="M1667.5 1011.333a549 549 0 1 1-549-549 549 549 0 0 1 549 549z" fill="#7b83eb"/>
-                    <path d="M1667.5 1011.333a549 549 0 1 1-549-549 549 549 0 0 1 549 549z" fill="#7b83eb"/>
-                    <circle cx="1118.5" cy="1011.333" r="440.583" fill="#fff"/>
-                    <path d="M1118.5 570.75v881.167" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                    <path d="M678.917 1011.333h881.166" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                    <path d="M1118.5 1451.917V2084.667" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                    <path d="M1118.5 1451.917h632.75" fill="none" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                    <circle cx="1118.5" cy="1011.333" r="220.292" fill="#5059c9"/>
-                    <text x="1118.5" y="1150" font-family="Segoe UI, sans-serif" font-size="400" font-weight="600" fill="#fff" text-anchor="middle">T</text>
-                </g>
-            </svg>
-            <span class="teams-text">InnovateSync</span>
-        </a>
-    </div>
+    <!-- Top Bar -->
+    <header>
+        <div data-include="components/topbar.html"></div>
+    </header>
 
-    <!-- Left Navigation Rail -->
-    <nav class="nav-rail">
-        <div class="nav-rail-top">
-            <button class="nav-item" data-page="teams" title="Teams">
-                <i class="fas fa-users"></i>
-            </button>
-            <button class="nav-item" data-page="chat" title="Chat">
-                <i class="fas fa-comment"></i>
-            </button>
-            <button class="nav-item" data-page="calendar" title="Calendar">
-                <i class="fas fa-calendar"></i>
-            </button>
-            <button class="nav-item" data-page="calls" title="Calls">
-                <i class="fas fa-phone"></i>
-            </button>
-            <button class="nav-item" data-page="files" title="Files">
-                <i class="fas fa-folder"></i>
-            </button>
-        </div>
-        <div class="nav-rail-bottom">
-            <button class="nav-item" data-page="apps" title="Apps">
-                <i class="fas fa-th"></i>
-            </button>
-            <button class="nav-item" data-page="settings" title="Settings">
-                <i class="fas fa-cog"></i>
-            </button>
-            <div class="user-avatar">
-                <img src="https://ui-avatars.com/api/?name=User&background=6264a7&color=fff" alt="User">
-            </div>
-        </div>
+    <!-- Sidebar -->
+    <nav>
+        <div data-include="components/sidebar.html"></div>
     </nav>
 
     <!-- Main Content Area -->
@@ -78,12 +35,12 @@
                     <text x="1118.5" y="1150" font-family="Segoe UI, sans-serif" font-size="400" font-weight="600" fill="#fff" text-anchor="middle">T</text>
                 </g>
             </svg>
-            <h1 class="home-title">Welcome to InnovateSync</h1>
+            <h1 class="home-title">Welcome to Microsoft Teams</h1>
             <p class="home-subtitle">Select an option from the sidebar to get started</p>
         </div>
     </div>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/include.js"></script>
     <script src="scripts/home.js"></script>
 </body>
 </html>
