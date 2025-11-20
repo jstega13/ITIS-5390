@@ -79,7 +79,6 @@ function navigateToPage(page) {
             case 'settings':
                 targetPath = 'settings/settings.html';
                 break;
-            
             case 'calendar':
             case 'calls':
             case 'files':

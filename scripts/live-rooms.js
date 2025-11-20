@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // ---- Config: where to load the JSON from (relative to pages/live-rooms.html) ----
-    const ROOMS_JSON_URL = "../data/rooms.json";
+    const ROOMS_JSON_URL = "../data/data.json";
 
     // ---- State ----
     let rooms = [];          // full list from JSON
