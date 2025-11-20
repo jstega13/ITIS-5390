@@ -1,0 +1,63 @@
+[
+    {
+      "id": "room-ux-lab",
+      "name": "UX Lab \u2013 Co-Design",
+      "topic": "Ideation & rapid prototyping",
+      "type": "Open collaboration",
+      "description": "Drop in to sketch flows, review Figma frames, and test new interaction patterns together.",
+      "participants": 7,
+      "live": true,
+      "joined": true,
+      "recentActivity": [
+        "Julian joined from Desktop.",
+        "Ryan shared a new prototype link.",
+        "Auto-synced comments from the Design channel."
+      ]
+    },
+    {
+      "id": "room-sprint-planning",
+      "name": "Sprint Planning \u2013 Week 13",
+      "topic": "Backlog grooming & story sizing",
+      "type": "Scheduled stand-up",
+      "description": "Short, focused planning room for aligning on sprint goals, assigning owners, and setting scope.",
+      "participants": 3,
+      "live": true,
+      "joined": false,
+      "recentActivity": [
+        "Bot pinned the Week 13 backlog.",
+        "2 items moved to stretch goals.",
+        "Reminder: next planning is Friday 10:00 AM."
+      ]
+    },
+    {
+      "id": "room-support-escalations",
+      "name": "Support Escalations",
+      "topic": "High-priority tickets & incidents",
+      "type": "Focus room",
+      "description": "A quiet, always-on room for engineers and support to handle escalated issues in real time.",
+      "participants": 5,
+      "live": false,
+      "joined": false,
+      "recentActivity": [
+        "Incident #4321 resolved.",
+        "Added incident-summary template.",
+        "Ops lead left the room."
+      ]
+    },
+    {
+      "id": "room-study-hall",
+      "name": "Study Hall \u2013 Quiet Focus",
+      "topic": "Deep work, light check-ins",
+      "type": "Drop-in",
+      "description": "Muted, camera-optional room for individual work with periodic check-ins to stay accountable.",
+      "participants": 2,
+      "live": true,
+      "joined": false,
+      "recentActivity": [
+        "Pomodoro timer started (25 min).",
+        "2 members muted their mics.",
+        "Shared link: 'System Design Cheatsheet'."
+      ]
+    }
+  ]
+  

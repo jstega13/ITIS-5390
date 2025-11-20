@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Rooms – InnovateSync</title>
+
+    <!-- Global base styles -->
+    <link rel="stylesheet" href="../styles/styles.css" />
+
+    <!-- Live Rooms page styles (you already have this file) -->
+    <link rel="stylesheet" href="../styles/live-rooms.css" />
+
+    <!-- Font Awesome (icons) -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <header>
+        <div data-include="../components/topbar.html"></div>
+    </header>
+
+    <!-- LEFT NAV RAIL -->
+    <nav>
+        <div data-include="../components/sidebar.html"></div>
+    </nav>
+
+    <!-- LIVE ROOMS MAIN CONTENT -->
+    <div class="rooms-container">
+        <section class="rooms-layout">
+
+            <!-- LEFT: ROOMS LIST PANEL -->
+            <aside class="rooms-list-panel">
+                <div class="rooms-panel-header">
+                    <div class="rooms-title-wrap">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <span>Live Rooms</span>
+                    </div>
+                    <button
+                        id="create-room-btn"
+                        class="rooms-icon-btn"
+                        title="Create Room"
+                        type="button"
+                    >
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <div class="rooms-search">
+                    <i class="fas fa-search"></i>
+                    <input
+                        type="text"
+                        id="rooms-search-input"
+                        placeholder="Search rooms..."
+                        aria-label="Search rooms"
+                    />
+                </div>
+
+                <ul id="rooms-list" class="rooms-list">
+                    <!-- Populated dynamically by live-rooms.js -->
+                </ul>
+            </aside>
+
+            <!-- RIGHT: ROOM DETAIL PANEL -->
+            <section class="room-detail-panel">
+
+                <!-- Empty state when no room is selected -->
+                <div id="room-empty-state" class="room-detail-empty">
+                    <i class="fas fa-headphones-alt empty-icon"></i>
+                    <h1>Select a Room</h1>
+                    <p>
+                        Choose a room from the left to join or leave.
+                        Live Rooms are spaces for quick, drop-in collaboration.
+                    </p>
+                </div>
+
+                <!-- Active room detail content -->
+                <div id="room-detail" class="room-detail" hidden>
+                    <header class="room-detail-header">
+                        <div class="room-detail-title-block">
+                            <div id="room-detail-avatar" class="room-detail-avatar"></div>
+
+                            <div class="room-detail-titles">
+                                <h1 id="room-detail-name"></h1>
+                                <p id="room-detail-subtitle"></p>
+
+                                <div class="room-detail-pills">
+                                    <span
+                                        id="room-detail-live-pill"
+                                        class="pill pill-live"
+                                    >
+                                        <span class="pill-dot"></span>
+                                        Live
+                                    </span>
+
+                                    <span
+                                        id="room-detail-joined-pill"
+                                        class="pill pill-joined"
+                                    >
+                                        <i class="fas fa-check-circle"></i>
+                                        Joined
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            id="room-join-leave-btn"
+                            class="room-cta-btn"
+                            type="button"
+                        >
+                            <!-- Text set by JS -->
+                        </button>
+                    </header>
+
+                    <div class="room-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Participants</span>
+                            <span
+                                id="room-meta-participants"
+                                class="meta-value"
+                            ></span>
+                        </div>
+
+                        <div class="meta-item">
+                            <span class="meta-label">Topic</span>
+                            <span id="room-meta-topic" class="meta-value"></span>
+                        </div>
+
+                        <div class="meta-item">
+                            <span class="meta-label">Room Type</span>
+                            <span id="room-meta-type" class="meta-value"></span>
+                        </div>
+                    </div>
+
+                    <section class="room-description">
+                        <h2>Room Overview</h2>
+                        <p id="room-description-text"></p>
+                    </section>
+
+                    <section class="room-activity">
+                        <h2>Recent Activity (Mock)</h2>
+                        <ul
+                            id="room-activity-list"
+                            class="room-activity-list"
+                        ></ul>
+                    </section>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <!-- COMPONENT LOADER (same pattern as other pages) -->
+    <script src="../scripts/include.js"></script>
+
+    <!-- GLOBAL NAV / ROUTING -->
+    <script src="../scripts/main.js"></script>
+
+    <!-- LIVE ROOMS LOGIC -->
+    <script src="../scripts/live-rooms.js"></script>
+</body>
+</html>

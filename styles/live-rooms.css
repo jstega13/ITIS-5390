@@ -1,0 +1,481 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system,
+        BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+    background-color: #ffffff;
+}
+
+/* ---------------- Top Logo Bar (copied from home.css) ---------------- */
+
+.top-logo-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background-color: var(--teams-purple-dark);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teams-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.teams-logo-link:hover {
+    opacity: 0.8;
+}
+
+.teams-logo-small {
+    width: 32px;
+    height: 32px;
+}
+
+.teams-text {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* ---------------- Adjust Nav Rail for Top Bar (copied) ---------------- */
+
+.nav-rail {
+    margin-top: 48px;
+    height: calc(100vh - 48px);
+}
+
+
+/* Main canvas for this page – sits to the right of nav-rail and under top bar */
+.rooms-container {
+    margin-left: 64px;          /* same offset as home-container */
+    margin-top: 48px;           /* same as top bar height */
+    height: calc(100vh - 48px);
+    display: flex;
+    background-color: #f3f2f1;  /* light Teams-style gray */
+    position: relative;
+}
+
+/* Flex layout: left panel (rooms list) + right panel (room detail) */
+.rooms-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------------- LEFT PANEL: Rooms List ---------------- */
+
+.rooms-list-panel {
+    width: 280px;
+    min-width: 260px;
+    max-width: 320px;
+    background-color: #ffffff;
+    border-right: 1px solid #e1dfdd;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Header row within the panel */
+.rooms-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e1dfdd;
+}
+
+.rooms-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teams-purple-dark);
+}
+
+.rooms-title-wrap i {
+    font-size: 14px;
+}
+
+.rooms-icon-btn {
+    border: none;
+    outline: none;
+    background-color: var(--teams-purple);
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Search bar under header */
+.rooms-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-bottom: 1px solid #e1dfdd;
+    font-size: 13px;
+    color: var(--teams-gray);
+    background-color: #faf9f8;
+}
+
+.rooms-search i {
+    font-size: 13px;
+}
+
+.rooms-search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--teams-text);
+    font-size: 13px;
+}
+
+/* Scrollable list of rooms */
+.rooms-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Individual room item */
+.room-list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--teams-text);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    background-color: transparent;
+    transition:
+        background-color 0.12s ease-out,
+        border-left-color 0.12s ease-out;
+}
+
+.room-list-item:hover {
+    background-color: #f3f2f1;
+}
+
+.room-list-item.active {
+    background-color: #e1dfdd;
+    border-left-color: var(--teams-purple);
+}
+
+/* Small circle avatar with initials */
+.room-list-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background-color: #f3f2f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Text stack inside item */
+.room-list-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.room-list-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.room-list-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.room-list-live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: #107c10; /* Teams green */
+}
+
+.room-list-meta {
+    font-size: 11px;
+    color: var(--teams-gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tag on the right when the user is already in the room */
+.room-list-joined-tag {
+    margin-left: auto;
+    font-size: 10px;
+    border-radius: 999px;
+    border: 1px solid #c8c6c4;
+    padding: 1px 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teams-gray);
+}
+
+/* ---------------- RIGHT PANEL: Room Detail ---------------- */
+
+.room-detail-panel {
+    flex: 1;
+    min-width: 0;
+    background-color: #f3f2f1;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Empty state when no room selected */
+.room-detail-empty {
+    margin: auto;
+    text-align: center;
+    max-width: 480px;
+    opacity: 0.9;
+}
+
+.empty-icon {
+    font-size: 40px;
+    color: var(--teams-purple);
+    margin-bottom: 12px;
+}
+
+.room-detail-empty h1 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    color: var(--teams-text);
+}
+
+.room-detail-empty p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--teams-gray);
+}
+
+/* Active detail section */
+.room-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+/* Header: avatar + titles + pills + join/leave button */
+.room-detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.room-detail-title-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.room-detail-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background-color: #e1dfdd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--teams-text);
+}
+
+.room-detail-titles h1 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--teams-text);
+}
+
+.room-detail-titles p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: var(--teams-gray);
+}
+
+/* Pills for Live / Joined */
+.room-detail-pills {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.pill {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pill-live {
+    border: 1px solid #107c10;
+    color: #107c10;
+    background-color: #dff6dd;
+}
+
+.pill-joined {
+    border: 1px solid #605e5c;
+    color: #605e5c;
+    background-color: #ffffff;
+}
+
+.pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background-color: #107c10;
+}
+
+/* Join / Leave button */
+.room-cta-btn {
+    border: none;
+    outline: none;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.room-cta-join {
+    background-color: #107c10;
+    color: #ffffff;
+}
+
+.room-cta-leave {
+    background-color: #a4262c;
+    color: #ffffff;
+}
+
+/* Meta info row */
+.room-meta {
+    display: flex;
+    gap: 24px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1dfdd;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.meta-label {
+    font-size: 10px;
+    color: var(--teams-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.meta-value {
+    font-size: 13px;
+    color: var(--teams-text);
+}
+
+/* Description + Activity */
+.room-description,
+.room-activity {
+    padding-top: 10px;
+}
+
+.room-description h2,
+.room-activity h2 {
+    font-size: 14px;
+    margin: 0 0 4px 0;
+    color: var(--teams-text);
+}
+
+#room-description-text {
+    font-size: 13px;
+    color: var(--teams-gray);
+}
+
+.room-activity-list {
+    list-style: none;
+    margin: 4px 0 0 0;
+    padding: 0;
+    font-size: 13px;
+    color: var(--teams-gray);
+}
+
+.room-activity-list li {
+    padding: 2px 0;
+}
+
+@media (max-width: 768px) {
+    .teams-text {
+        display: none;
+    }
+
+    .rooms-container {
+        margin-left: 56px;
+    }
+
+    .rooms-list-panel {
+        width: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .rooms-layout {
+        flex-direction: column;
+    }
+
+    .rooms-list-panel {
+        width: 100%;
+        max-width: 100%;
+        height: 220px;
+    }
+
+    .room-detail-panel {
+        padding: 12px 16px;
+    }
+}
