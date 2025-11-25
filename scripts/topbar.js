@@ -1,8 +1,6 @@
-// Inject topbar component
-fetch("/components/topbar.html")
-    .then(r => r.text())
-    .then(html => {
-        document.getElementById("topbar").innerHTML = html;
-    })
-    .catch(err => console.error("Topbar load error:", err));
-
+// Load Topbar HTML
+fetch("../components/topbar.html")
+    .then(res => res.text())
+    .then(data => {
+        document.getElementById("topbar-container").innerHTML = data;
+    });
