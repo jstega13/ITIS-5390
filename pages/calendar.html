@@ -1,30 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Calendar</title>
-  <link rel="stylesheet" href="../styles/global.css">
-  <script defer src="../scripts/topbar.js"></script>
-  <script defer src="../scripts/sidebar.js"></script>
-  <script defer src="../scripts/calendar.js"></script>
+    <meta charset="UTF-8" />
+    <title>Calendar</title>
+    <link rel="stylesheet" href="../styles/global.css">
+
+    <!-- Load shared components -->
+    <script defer src="../scripts/topbar.js"></script>
+    <script defer src="../scripts/sidebar.js"></script>
+    <script defer src="../scripts/calendar.js"></script>
+
+    <!-- Font Awesome for icons (required for your sidebar) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-  <!-- Topbar loads here -->
-  <div id="topbar"></div>
 
-  <!-- Sidebar loads here -->
-  <div id="sidebar"></div>
+    <!-- Topbar loads here -->
+    <div id="topbar"></div>
 
-  <main>
-    <h1>Calendar</h1>
-    <p>Your calendar will appear here.</p>
-  </main>
+    <!-- Sidebar loads here -->
+    <div id="sidebar"></div>
 
-  <script>
-    /* Highlight the Calendar item in the sidebar */
-    document.addEventListener("DOMContentLoaded", () => {
-      const item = document.getElementById("sidebar-calendar");
-      if (item) item.classList.add("active");
-    });
-  </script>
+  
+    <main class="page-content">
+        <h1>Calendar</h1>
+        <p>This is your calendar page.</p>
+    </main>
+
+    <script>
+        /* Highlight the Calendar icon (4th button) */
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendarBtn = document.querySelector('[data-page="calendar"]');
+            if (calendarBtn) {
+                calendarBtn.classList.add("active");
+            }
+        });
+    </script>
+
 </body>
 </html>
+
