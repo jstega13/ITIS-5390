@@ -23,42 +23,54 @@ function initializeNavigation() {
 }
 
 // Navigate to different pages
-    function navigateToPage(page) {
-    const basePath = getBasePath();
+function navigateToPage(page) {
+    // Determine the base path dynamically
+    let basePath = './'; // default: at root
+    const pathParts = window.location.pathname.split('/');
 
-    // if already inside /pages, don't add "pages/" again
-    const folder = basePath === '../' ? '' : 'pages/';
-
-    let targetPath = '';
-        
-        switch(page) {
-            case 'teams':
-                targetPath = `${basePath}teams.html`;
-                break;
-            case 'live_rooms':
-                targetPath = `${basePath}live_rooms.html`;
-                break;
-            case 'chat':
-                targetPath = `${basePath}chat.html`;
-                break;
-            case 'calendar':
-                targetPath = `${basePath}calender.html`;
-                break;
-            case 'settings':
-                targetPath = `${basePath}settings.html`;
-                break;
-            case 'files':
-                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-                return;
-            case 'apps':
-                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-                return;
-        }
-        
-        if (targetPath) {
-            window.location.href = targetPath;
-        }
+    // If hosted on GitHub Pages, include the repo folder
+    // e.g., '/ITIS-5390/pages/chat.html' → repoName = 'ITIS-5390'
+    const repoName = pathParts[1] || '';
+    if (repoName && repoName !== 'pages') {
+        basePath = `/${repoName}/`;
     }
+
+    // If currently inside /pages folder, go up one level
+    if (pathParts.includes('pages')) {
+        basePath += 'pages/';
+    } else {
+        basePath += 'pages/';
+    }
+
+    // Build the target path based on page
+    let targetPath = '';
+    switch (page) {
+        case 'teams':
+            targetPath = `${basePath}teams.html`;
+            break;
+        case 'live_rooms':
+            targetPath = `${basePath}live_rooms.html`;
+            break;
+        case 'chat':
+            targetPath = `${basePath}chat.html`;
+            break;
+        case 'calendar':
+            targetPath = `${basePath}calendar.html`;
+            break;
+        case 'settings':
+            targetPath = `${basePath}settings.html`;
+            break;
+        case 'files':
+        case 'apps':
+            alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
+            return;
+    }
+
+    // Navigate
+    if (targetPath) {
+        window.location.href = targetPath;
+    }
+}
 
 // Teams Expansion/Collapse
 function initializeTeams() {
