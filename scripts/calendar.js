@@ -1,5 +1,4 @@
 // Calendar Script
-
 const calendarDays = document.getElementById("calendarDays");
 const monthYear = document.getElementById("monthYear");
 
@@ -19,12 +18,14 @@ function loadCalendar(date) {
 
     calendarDays.innerHTML = "";
 
+    // Empty squares before the first day
     for (let i = 0; i < firstDay.getDay(); i++) {
         const emptyCell = document.createElement("div");
         emptyCell.classList.add("calendar-day");
         calendarDays.appendChild(emptyCell);
     }
 
+    // Create day squares
     for (let day = 1; day <= lastDay.getDate(); day++) {
         const cell = document.createElement("div");
         cell.classList.add("calendar-day");
@@ -53,4 +54,6 @@ document.getElementById("nextMonth").addEventListener("click", () => {
     loadCalendar(currentDate);
 });
 
+// Initialize
 loadCalendar(currentDate);
+
