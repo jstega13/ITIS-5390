@@ -24,71 +24,34 @@ function initializeNavigation() {
 
 // Navigate to different pages
 function navigateToPage(page) {
-    // Get current path to determine relative navigation
-    const currentPath = window.location.pathname;
-    let targetPath = '';
-    
-    // Determine the base path based on current location
-    if (currentPath.includes('/pages/Chats/')) {
-        // From Chats folder
-        switch(page) {
-            case 'teams':
-                targetPath = '../index.html';
-                break;
-            case 'chat':
-                targetPath = 'chat.html';
-                break;
-            case 'settings':
-                targetPath = '../settings/settings.html';
-                break;
-            case 'calendar':
-            case 'calls':
-            case 'files':
-            case 'apps':
-                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-                return;
-        }
-    } else if (currentPath.includes('/pages/settings/')) {
-        // From settings folder
-        switch(page) {
-            case 'teams':
-                targetPath = '../index.html';
-                break;
-            case 'chat':
-                targetPath = '../Chats/chat.html';
-                break;
-            case 'settings':
-                targetPath = 'settings.html';
-                break;
-            case 'calendar':
-            case 'calls':
-            case 'files':
-            case 'apps':
-                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-                return;
-        }
-    } else {
-        // From pages root (index.html)
-        switch(page) {
-            case 'teams':
-                targetPath = 'index.html';
-                break;
-            case 'chat':
-                targetPath = 'Chats/chat.html';
-                break;
-            case 'settings':
-                targetPath = 'settings/settings.html';
-                break;
-            case 'calendar':
-            case 'calls':
-            case 'files':
-            case 'apps':
-                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-                return;
-        }
+    // Determine if we are inside the /pages folder or at root
+    const inPagesFolder = window.location.pathname.includes("/pages/");
+    // If at root (index.html), pages live in "pages/"
+    const base = inPagesFolder ? "." : "pages";
+    let targetPath = "";
+    switch (page) {
+        case "teams":
+            // Teams is your home page
+            targetPath = inPagesFolder ? "../index.html" : "index.html";
+            break;
+        case "chat":
+            targetPath = `${base}/chat.html`;
+            break;
+        case "calendar":
+            targetPath = `${base}/calendar.html`;
+            break;
+        case "live_rooms":
+            targetPath = `${base}/live_rooms.html`;
+            break;
+        case "settings":
+            targetPath = `${base}/settings.html`;
+            break;
+        case "calls":
+        case "files":
+        case "apps":
+            alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
+            return;
     }
-    
-    // Navigate to the target page
     if (targetPath) {
         window.location.href = targetPath;
     }
