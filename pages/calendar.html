@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendar</title>
+  <link rel="stylesheet" href="../styles/global.css">
+  <script defer src="../scripts/topbar.js"></script>
+  <script defer src="../scripts/sidebar.js"></script>
+  <script defer src="../scripts/calendar.js"></script>
+</head>
+<body>
+  <!-- Topbar loads here -->
+  <div id="topbar"></div>
+
+  <!-- Sidebar loads here -->
+  <div id="sidebar"></div>
+
+  <main>
+    <h1>Calendar</h1>
+    <p>Your calendar will appear here.</p>
+  </main>
+
+  <script>
+    /* Highlight the Calendar item in the sidebar */
+    document.addEventListener("DOMContentLoaded", () => {
+      const item = document.getElementById("sidebar-calendar");
+      if (item) item.classList.add("active");
+    });
+  </script>
+</body>
+</html>
