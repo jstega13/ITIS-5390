@@ -98,16 +98,20 @@
         
         switch(page) {
             case 'teams':
-                targetPath = `${basePath}pages/teams.html`;
+                targetPath = `${basePath}teams.html`;
                 break;
             case 'chat':
-                targetPath = `${basePath}pages/Chats/chat.html`;
+                targetPath = `${basePath}chat.html`;
                 break;
             case 'settings':
-                targetPath = `${basePath}pages/settings/settings.html`;
+                targetPath = `${basePath}settings.html`;
                 break;
             case 'calendar':
+                targetPath = `${basePath}calender.html`;
+                break;
             case 'calls':
+                targetPath = `${basePath}live_rooms.html`;
+                break;
             case 'files':
             case 'apps':
                 alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
