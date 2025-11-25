@@ -93,24 +93,28 @@
 
     // Navigate to different pages
     function navigateToPage(page) {
-        const basePath = getBasePath();
-        let targetPath = '';
+    const basePath = getBasePath();
+
+    // if already inside /pages, don't add "pages/" again
+    const folder = basePath === '../' ? '' : 'pages/';
+
+    let targetPath = '';
         
         switch(page) {
             case 'teams':
                 targetPath = `${basePath}teams.html`;
                 break;
+            case 'live_rooms':
+                targetPath = `${basePath}live_rooms.html`;
+                break;
             case 'chat':
                 targetPath = `${basePath}chat.html`;
-                break;
-            case 'settings':
-                targetPath = `${basePath}settings.html`;
                 break;
             case 'calendar':
                 targetPath = `${basePath}calender.html`;
                 break;
-            case 'calls':
-                targetPath = `${basePath}live_rooms.html`;
+            case 'settings':
+                targetPath = `${basePath}settings.html`;
                 break;
             case 'files':
             case 'apps':
