@@ -23,39 +23,42 @@ function initializeNavigation() {
 }
 
 // Navigate to different pages
-function navigateToPage(page) {
-    // Determine if we are inside the /pages folder or at root
-    const inPagesFolder = window.location.pathname.includes("/pages/");
-    // If at root (index.html), pages live in "pages/"
-    const base = inPagesFolder ? "." : "pages";
-    let targetPath = "";
-    switch (page) {
-        case "teams":
-            // Teams is your home page
-            targetPath = inPagesFolder ? "../index.html" : "index.html";
-            break;
-        case "chat":
-            targetPath = `${base}/chat.html`;
-            break;
-        case "calendar":
-            targetPath = `${base}/calendar.html`;
-            break;
-        case "live_rooms":
-            targetPath = `${base}/live_rooms.html`;
-            break;
-        case "settings":
-            targetPath = `${base}/settings.html`;
-            break;
-        case "calls":
-        case "files":
-        case "apps":
-            alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
-            return;
+    function navigateToPage(page) {
+    const basePath = getBasePath();
+
+    // if already inside /pages, don't add "pages/" again
+    const folder = basePath === '../' ? '' : 'pages/';
+
+    let targetPath = '';
+        
+        switch(page) {
+            case 'teams':
+                targetPath = `${basePath}teams.html`;
+                break;
+            case 'live_rooms':
+                targetPath = `${basePath}live_rooms.html`;
+                break;
+            case 'chat':
+                targetPath = `${basePath}chat.html`;
+                break;
+            case 'calendar':
+                targetPath = `${basePath}calender.html`;
+                break;
+            case 'settings':
+                targetPath = `${basePath}settings.html`;
+                break;
+            case 'files':
+                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
+                return;
+            case 'apps':
+                alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
+                return;
+        }
+        
+        if (targetPath) {
+            window.location.href = targetPath;
+        }
     }
-    if (targetPath) {
-        window.location.href = targetPath;
-    }
-}
 
 // Teams Expansion/Collapse
 function initializeTeams() {
