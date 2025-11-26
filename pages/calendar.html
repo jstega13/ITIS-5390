@@ -4,22 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
-    <link rel="stylesheet" href="../styles/global.css" />
-    <link rel="stylesheet" href="../styles/calendar.css" />
+
+    <!-- Your styles -->
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/calendar.css">
+
+    <style>
+        /* FIX: Prevent topbar SVG from going fullscreen */
+        header .top-logo-bar svg {
+            width: 48px !important;
+            height: 48px !important;
+        }
+
+        header .top-logo-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+        }
+
+        /* Sidebar + content layout */
+        .layout {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        aside {
+            min-width: 70px;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
 </head>
 
 <body>
+
     <!-- Top Bar -->
     <header data-include="../components/topbar.html"></header>
 
-    <!-- Layout contains Sidebar + Main -->
+    <!-- Sidebar + Main -->
     <div class="layout">
-        
+
         <!-- Sidebar -->
-        <aside class="sidebar" data-include="../components/sidebar.html"></aside>
+        <aside data-include="../components/sidebar.html"></aside>
 
         <!-- Main Calendar Area -->
         <main class="calendar-wrapper">
+
             <h1 class="page-title">Calendar</h1>
 
             <div class="calendar-header">
@@ -39,11 +74,15 @@
 
                 <div id="calendarDays"></div>
             </div>
+
         </main>
     </div>
 
+    <!-- Includes -->
     <script src="../scripts/include.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/calendar.js"></script>
+
 </body>
-</html>
+</html
+
