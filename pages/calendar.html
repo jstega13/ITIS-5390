@@ -1,55 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendar</title>
-    <link rel="stylesheet" href="../styles/global.css" />
-    <link rel="stylesheet" href="../styles/calendar.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Teams - Calendar</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/calendar.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
     <!-- Top Bar -->
     <header>
-        <div data-include="../components/topbar.html"></div>
+        <div data-include="components/topbar.html"></div>
     </header>
 
-    <!-- Sidebar -->
+    <!-- Navigation Rail / Sidebar -->
     <nav>
-        <div data-include="../components/sidebar.html"></div>
+        <div data-include="components/sidebar.html"></div>
     </nav>
 
-    <!-- Layout -->
-    <div class="layout">
-        <!-- Sidebar container (if needed by scripts) -->
-        <div id="sidebar-container"></div>
-
-        <!-- Main Calendar Area -->
-        <main class="calendar-wrapper">
-            <h1 class="page-title">Calendar</h1>
-
+    <!-- Main Content Area -->
+    <div class="main-container">
+        <div class="calendar-content">
             <div class="calendar-header">
-                <button id="prevMonth">&#10094;</button>
-                <h2 id="monthYear"></h2>
-                <button id="nextMonth">&#10095;</button>
+                <h1><i class="fa-solid fa-calendar-days"></i> Calendar</h1>
             </div>
-
-            <div class="calendar-grid">
-                <div class="day-label">Sun</div>
-                <div class="day-label">Mon</div>
-                <div class="day-label">Tue</div>
-                <div class="day-label">Wed</div>
-                <div class="day-label">Thu</div>
-                <div class="day-label">Fri</div>
-                <div class="day-label">Sat</div>
-                <div id="calendarDays"></div>
-            </div>
-        </main>
-    </div>
-
-    <script src="../scripts/include.js"></script>
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/calendar.js"></script>
-</body>
-</html>
 
