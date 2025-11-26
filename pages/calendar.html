@@ -10,19 +10,13 @@
 
 <body>
     <!-- Top Bar -->
-    <header>
-        <div data-include="../components/topbar.html"></div>
-    </header>
+    <header data-include="../components/topbar.html"></header>
 
-    <!-- Sidebar -->
-    <nav>
-        <div data-include="../components/sidebar.html"></div>
-    </nav>
-
-    <!-- Layout -->
+    <!-- Layout contains Sidebar + Main -->
     <div class="layout">
-        <!-- Sidebar container (if needed by scripts) -->
-        <div id="sidebar-container"></div>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" data-include="../components/sidebar.html"></aside>
 
         <!-- Main Calendar Area -->
         <main class="calendar-wrapper">
@@ -42,6 +36,7 @@
                 <div class="day-label">Thu</div>
                 <div class="day-label">Fri</div>
                 <div class="day-label">Sat</div>
+
                 <div id="calendarDays"></div>
             </div>
         </main>
