@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendar</title>
-
-    <link rel="stylesheet" href="../styles/calendar.css">
-</head>
-
 <body>
 
-    <!-- TOP BAR -->
+    <!-- Top Bar -->
     <header data-include="../components/topbar.html"></header>
 
-    <!-- SIDEBAR -->
+    <!-- Sidebar -->
     <aside data-include="../components/sidebar.html"></aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- Main Calendar Content -->
     <main class="calendar-wrapper">
-
-        <h1 class="page-title" style="margin-top: 90px;">Calendar</h1>
+        <h1 class="page-title">Calendar</h1>
 
         <div class="calendar-header">
             <button id="prevMonth">&#10094;</button>
@@ -38,59 +27,9 @@
 
             <div id="calendarDays"></div>
         </div>
-
     </main>
 
-    <!-- LOAD INCLUDES FIRST -->
     <script src="../scripts/include.js"></script>
-
-    <!-- APPLY STYLES **AFTER** COMPONENTS LOAD -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-
-        /* Wait for the include.js to finish adding the HTML */
-        setTimeout(() => {
-
-            /* ------- FIXED TOP BAR ------- */
-            const header = document.querySelector("header");
-            if (header) {
-                header.style.position = "fixed";
-                header.style.top = "0";
-                header.style.left = "0";
-                header.style.width = "100%";
-                header.style.height = "72px";
-                header.style.zIndex = "1000";
-                header.style.background = "#464775";
-            }
-
-            /* ------- FIXED SIDEBAR ------- */
-            const sidebar = document.querySelector("aside");
-            if (sidebar) {
-                sidebar.style.position = "fixed";
-                sidebar.style.top = "72px";
-                sidebar.style.left = "0";
-                sidebar.style.width = "70px";
-                sidebar.style.height = "calc(100vh - 72px)";
-                sidebar.style.background = "#464775";
-                sidebar.style.overflow = "hidden";
-                sidebar.style.zIndex = "999";
-            }
-
-            /* PUSH MAIN CONTENT INTO POSITION */
-            const main = document.querySelector("main");
-            if (main) {
-                main.style.marginLeft = "70px";
-                main.style.marginTop = "72px";
-            }
-
-        }, 50); // allow includes to finish loading
-
-    });
-    </script>
-
     <script src="../scripts/calendar.js"></script>
 
 </body>
-</html>
-
-
