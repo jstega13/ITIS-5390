@@ -2,88 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
+    <link rel="stylesheet" href="../styles/global.css" />
     <link rel="stylesheet" href="../styles/calendar.css" />
-    <style>
-        /* Minimal styles to fix layout */
-
-        /* Sidebar and topbar are fixed */
-        aside.sidebar {
-            position: fixed;
-            top: 72px; /* below topbar */
-            left: 0;
-            width: 70px;
-            height: calc(100vh - 72px);
-            background-color: #282c34;
-            /* Add other sidebar styles */
-            z-index: 1000;
-        }
-
-        header.topbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 72px;
-            background-color: #20232a;
-            z-index: 1100;
-        }
-
-        main.calendar-wrapper {
-            margin-left: 70px; /* sidebar width */
-            margin-top: 72px; /* topbar height */
-            padding: 20px;
-            position: relative;
-            z-index: 10;
-            background: white;
-            min-height: 100vh;
-        }
-
-        /* Fix the big shape: ensure container hides overflow */
-        .calendar-wrapper {
-            overflow: hidden;
-        }
-
-        /* Example shape fix (adjust or remove if you have canvas or svg) */
-        .big-shape {
-            position: absolute;
-            max-width: 100%;
-            max-height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-    </style>
 </head>
+
 <body>
+    <!-- Top Bar -->
+    <header data-include="../components/topbar.html"></header>
 
-    <header data-include="../components/topbar.html" class="topbar"></header>
-    <aside data-include="../components/sidebar.html" class="sidebar"></aside>
+    <!-- Layout contains Sidebar + Main -->
+    <div class="layout">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" data-include="../components/sidebar.html"></aside>
 
-    <main class="calendar-wrapper">
-        <h1 class="page-title">Calendar</h1>
-        <div class="calendar-header">
-            <button id="prevMonth">&#10094;</button>
-            <h2 id="monthYear"></h2>
-            <button id="nextMonth">&#10095;</button>
-        </div>
+        <!-- Main Calendar Area -->
+        <main class="calendar-wrapper">
+            <h1 class="page-title">Calendar</h1>
 
-        <div class="calendar-grid">
-            <div class="day-label">Sun</div>
-            <div class="day-label">Mon</div>
-            <div class="day-label">Tue</div>
-            <div class="day-label">Wed</div>
-            <div class="day-label">Thu</div>
-            <div class="day-label">Fri</div>
-            <div class="day-label">Sat</div>
+            <div class="calendar-header">
+                <button id="prevMonth">&#10094;</button>
+                <h2 id="monthYear"></h2>
+                <button id="nextMonth">&#10095;</button>
+            </div>
 
-            <div id="calendarDays"></div>
-        </div>
-    </main>
+            <div class="calendar-grid">
+                <div class="day-label">Sun</div>
+                <div class="day-label">Mon</div>
+                <div class="day-label">Tue</div>
+                <div class="day-label">Wed</div>
+                <div class="day-label">Thu</div>
+                <div class="day-label">Fri</div>
+                <div class="day-label">Sat</div>
+
+                <div id="calendarDays"></div>
+            </div>
+        </main>
+    </div>
 
     <script src="../scripts/include.js"></script>
+    <script src="../scripts/main.js"></script>
     <script src="../scripts/calendar.js"></script>
-
 </body>
 </html>
-
