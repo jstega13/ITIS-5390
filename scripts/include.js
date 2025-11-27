@@ -47,50 +47,30 @@
 
     // Setup all navigation links
     function setupNavigation() {
-        const basePath = getBasePath();
-        
-        // Setup home link
-        const homeLink = document.getElementById('home-link');
-        if (homeLink && !homeLink.hasAttribute('data-nav-setup')) {
-            homeLink.href = `${basePath}index.html`;
-            homeLink.setAttribute('data-nav-setup', 'true');
-        }
-        
-        // Setup settings button
-        const settingsBtn = document.getElementById('settings-link');
-        if (settingsBtn && !settingsBtn.hasAttribute('data-nav-setup')) {
-            settingsBtn.addEventListener('click', function() {
-                navigateToPage('settings');
-            });
-            settingsBtn.setAttribute('data-nav-setup', 'true');
-        }
-        
-        // Setup sidebar navigation items
-        const navItems = document.querySelectorAll('.nav-item:not([data-nav-setup])');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                const page = this.getAttribute('data-page');
-                navigateToPage(page);
-            });
-            item.setAttribute('data-nav-setup', 'true');
+    // Setup home link
+    const homeLink = document.getElementById('home-link');
+    if (homeLink && !homeLink.hasAttribute('data-nav-setup')) {
+        homeLink.addEventListener('click', () => navigateToPage('home'));
+        homeLink.setAttribute('data-nav-setup', 'true');
+    }
+
+    // Setup settings button
+    const settingsBtn = document.getElementById('settings-link');
+    if (settingsBtn && !settingsBtn.hasAttribute('data-nav-setup')) {
+        settingsBtn.addEventListener('click', () => navigateToPage('settings'));
+        settingsBtn.setAttribute('data-nav-setup', 'true');
+    }
+
+    // Setup all other nav items
+    document.querySelectorAll('.nav-item:not([data-nav-setup])').forEach(item => {
+        item.addEventListener('click', function() {
+            const page = this.getAttribute('data-page');
+            navigateToPage(page);
         });
-    }
-
-    // Get base path based on current location
-    function getBasePath() {
-        const path = window.location.pathname;
-        
-        if (path.includes('/pages/Chats/')) {
-            return '../../';
-        } else if (path.includes('/pages/settings/')) {
-            return '../../';
-        } else if (path.includes('/pages/')) {
-            return '../';
-        } else {
-            return './';
-        }
-    }
-
+        item.setAttribute('data-nav-setup', 'true');
+    });
+}
+    
     // Navigate to different pages
     function navigateToPage(page) {
         // Determine the base path dynamically
@@ -114,6 +94,9 @@
         // Build the target path based on page
         let targetPath = '';
         switch (page) {
+            case 'home':
+                targetPath = `${basePath}index.html`;
+                break;
             case 'teams':
                 targetPath = `${basePath}teams.html`;
                 break;
