@@ -45,6 +45,9 @@ function navigateToPage(page) {
     // Build the target path based on page
     let targetPath = '';
     switch (page) {
+        case 'home':
+            targetPath = `${basePath}index.html`;
+            break;
         case 'teams':
             targetPath = `${basePath}teams.html`;
             break;
