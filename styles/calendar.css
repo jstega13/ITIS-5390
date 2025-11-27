@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     padding: 24px;
+    padding-top: 80px; /* ⬅ Add this so content starts below the topbar */
     background: var(--teams-white);
     overflow-y: auto;
     color: var(--teams-text);
