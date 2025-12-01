@@ -402,7 +402,6 @@
                 </div>
             </div>
 
-            <!-- Meta text -->
             <div class="meta">
                 <strong>Prototype only.</strong> “Sign in” with <strong>user / user</strong>,
                 or use the school account button to jump into the main UI.
@@ -410,9 +409,7 @@
         </div>
     </div>
 
-    <!-- Tiny JS to simulate navigation and basic logic -->
     <script>
-        // Change this to whatever your main page is called
         const MAIN_APP_URL = "index.html";
 
         const CORRECT_USER = "user";
@@ -457,7 +454,6 @@
 
         function openForgotPassword(event) {
             if (event) event.preventDefault();
-            // Prefill email if they already typed it
             const emailField = document.getElementById("email");
             const forgotEmailField = document.getElementById("forgot-email");
             if (emailField.value.trim() !== "") {

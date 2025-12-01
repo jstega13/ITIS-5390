@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calls – Microsoft Teams</title>
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="../styles/pages.css" />
+
+    <!-- Page-specific styles (optional, create this file later if needed) -->
+    <link rel="stylesheet" href="../styles/calls.css" />
+
+    <!-- Sidebar avatar menu styles -->
+    <link rel="stylesheet" href="../styles/sidebar-menu.css" />
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+</head>
+<body>
+    <!-- TOP BAR -->
+    <header id="topbar-container"></header>
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar-container"></nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- Page header -->
+        <section class="calls-header">
+            <h1>Calls</h1>
+            <p>View your recent activity or start a new call.</p>
+        </section>
+
+        <!-- Two-column layout: left = recent, right = dialer / favorites -->
+        <section class="calls-layout">
+            <!-- Recent calls list -->
+            <div class="calls-panel calls-recent">
+                <div class="panel-header">
+                    <h2>Recent</h2>
+                    <button class="panel-link-btn" type="button">
+                        <i class="fas fa-trash-alt"></i>
+                        Clear
+                    </button>
+                </div>
+
+                <ul class="calls-list">
+                    <li class="call-item">
+                        <div class="call-avatar">JS</div>
+                        <div class="call-meta">
+                            <div class="call-name">Jordan Smith</div>
+                            <div class="call-sub">
+                                <span class="call-type">
+                                    <i class="fas fa-phone-alt"></i> Audio call
+                                </span>
+                                · Today · 10:32 AM
+                            </div>
+                        </div>
+                        <button class="call-action-btn" type="button">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </li>
+
+                    <li class="call-item">
+                        <div class="call-avatar">MT</div>
+                        <div class="call-meta">
+                            <div class="call-name">Marketing Team</div>
+                            <div class="call-sub">
+                                <span class="call-type">
+                                    <i class="fas fa-video"></i> Video call
+                                </span>
+                                · Yesterday · 3:10 PM
+                            </div>
+                        </div>
+                        <button class="call-action-btn" type="button">
+                            <i class="fas fa-video"></i>
+                        </button>
+                    </li>
+
+                    <li class="call-item">
+                        <div class="call-avatar missed">AJ</div>
+                        <div class="call-meta">
+                            <div class="call-name">Alex Johnson</div>
+                            <div class="call-sub">
+                                <span class="call-type missed">
+                                    <i class="fas fa-arrow-down"></i> Missed call
+                                </span>
+                                · Mon · 8:45 AM
+                            </div>
+                        </div>
+                        <button class="call-action-btn" type="button">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Dial pad / quick start -->
+            <div class="calls-panel calls-actions">
+                <div class="panel-header">
+                    <h2>Start a call</h2>
+                </div>
+
+                <div class="start-call-card">
+                    <label for="call-search" class="start-call-label">
+                        Search or type a name
+                    </label>
+                    <div class="start-call-input-row">
+                        <i class="fas fa-search"></i>
+                        <input
+                            id="call-search"
+                            type="text"
+                            placeholder="Search people, groups, or numbers"
+                        />
+                    </div>
+
+                    <div class="start-call-buttons">
+                        <button class="btn-primary" type="button">
+                            <i class="fas fa-phone"></i>
+                            Audio call
+                        </button>
+                        <button class="btn-secondary" type="button">
+                            <i class="fas fa-video"></i>
+                            Video call
+                        </button>
+                    </div>
+                </div>
+
+                <div class="favorites-card">
+                    <div class="panel-header">
+                        <h3>Pinned contacts</h3>
+                    </div>
+                    <div class="favorites-grid">
+                        <div class="favorite-pill">
+                            <div class="favorite-avatar">HR</div>
+                            <span>HR Bot</span>
+                        </div>
+                        <div class="favorite-pill">
+                            <div class="favorite-avatar">PM</div>
+                            <span>Project Manager</span>
+                        </div>
+                        <div class="favorite-pill">
+                            <div class="favorite-avatar">DS</div>
+                            <span>Data Science</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Component loader & sidebar menu behavior -->
+   <script src="../scripts/include.js"></script>
+<script src="../scripts/sidebar-menu.js"></script>
+<script src="../scripts/calls.js"></script>
+<script src="../scripts/components.js"></script>
+    <link rel="stylesheet" href="../styles/styles.css" />
+<link rel="stylesheet" href="../styles/pages.css" />
+<link rel="stylesheet" href="../styles/calls.css" />
+<link rel="stylesheet" href="../styles/sidebar-menu.css" />
+
+</body>
+</html>

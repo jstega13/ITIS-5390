@@ -1,0 +1,378 @@
+/* Calls page layout */
+
+.main-content {
+    margin-left: 80px;                  /* space for sidebar */
+    padding: 96px 40px 40px;            /* room under topbar */
+}
+
+/* Header */
+
+.calls-header {
+    margin-bottom: 24px;
+}
+
+.calls-header h1 {
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.calls-header p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Panels layout */
+
+.calls-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1.8fr);
+    gap: 24px;
+    align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+    .calls-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Generic panel */
+
+.calls-panel {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 16px 18px 18px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.panel-header h2,
+.panel-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Small link-style buttons */
+
+.panel-link-btn {
+    border: none;
+    background: none;
+    font-size: 12px;
+    color: #4b53bc;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 4px;
+}
+
+.panel-link-btn i {
+    font-size: 12px;
+}
+
+.panel-link-btn:hover {
+    text-decoration: underline;
+}
+
+/* Recent calls list */
+
+.calls-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.call-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.call-item:hover {
+    background: #f3f2f8;
+}
+
+.call-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #5059c9;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.call-avatar.missed {
+    background: #fdf2f2;
+    color: #c0392b;
+    border: 1px solid #e57373;
+}
+
+.call-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.call-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.call-sub {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.call-type {
+    color: #4b53bc;
+}
+
+.call-type.missed {
+    color: #c0392b;
+}
+
+/* Right-side action button */
+
+.call-action-btn {
+    border: none;
+    background: #e4e6f6;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.call-action-btn i {
+    font-size: 14px;
+    color: #30397a;
+}
+
+.call-action-btn:hover {
+    background: #d4d7f0;
+}
+
+/* Start-a-call card */
+
+.start-call-card {
+    background: #f9f9fc;
+    border-radius: 12px;
+    padding: 14px 14px 16px;
+    margin-bottom: 16px;
+}
+
+.start-call-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.start-call-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    background: #ffffff;
+    margin-bottom: 10px;
+}
+
+.start-call-input-row i {
+    color: #888;
+    font-size: 14px;
+}
+
+.start-call-input-row input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    background: transparent;
+}
+
+.start-call-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* If your project already has .btn-primary / .btn-secondary, this will just enhance them */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: none;
+    background: #4b53bc;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(32, 31, 75, 0.35);
+}
+
+.btn-primary i {
+    font-size: 13px;
+}
+
+.btn-primary:hover {
+    background: #3d46a3;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid #cfd0ff;
+    background: #ffffff;
+    color: #30397a;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-secondary i {
+    font-size: 13px;
+}
+
+.btn-secondary:hover {
+    background: #f3f2ff;
+}
+
+/* Favorites */
+
+.favorites-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 14px 14px;
+}
+
+.favorites-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.favorite-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f3f2f8;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.favorite-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #5059c9;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Active call banner */
+
+.active-call-banner {
+    position: fixed;
+    top: 64px;
+    right: 40px;
+    background: #252423;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    z-index: 900;
+}
+
+.active-call-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.active-call-name {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.active-call-meta {
+    font-size: 12px;
+    color: #d0d0d0;
+}
+
+.active-call-timer {
+    font-variant-numeric: tabular-nums;
+}
+
+.active-call-end-btn {
+    border: none;
+    background: #d13438;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.active-call-end-btn i {
+    font-size: 13px;
+}
+
+.active-call-end-btn:hover {
+    background: #b12a30;
+}
+
+/* Hidden utility */
+
+.hidden {
+    display: none !important;
+}
+
+/* Missed-only filter */
+
+.missed-toggle-btn.active {
+    color: #c0392b;
+}
+
+.calls-recent.missed-only .call-item:not(.missed-call) {
+    display: none;
+}

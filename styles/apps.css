@@ -1,0 +1,89 @@
+/* Apps Page Styles */
+
+.main-content {
+    margin-left: 80px; /* space for sidebar */
+    padding: 30px 40px;
+}
+
+.apps-header {
+    margin-bottom: 25px;
+}
+
+.apps-header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.apps-header p {
+    color: #555;
+    font-size: 14px;
+}
+
+/* Grid Layout */
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* App Card */
+.app-card {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.app-icon {
+    width: 55px;
+    height: 55px;
+    background: #ecebfa;
+    color: #4b53bc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.app-info h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: #222;
+}
+
+.app-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Add Button */
+.app-btn {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background: #4b53bc;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.app-btn:hover {
+    background: #3d46a3;
+}
+.main-content {
+    margin-left: 80px;      
+    padding: 100px 40px 40px; 
+}

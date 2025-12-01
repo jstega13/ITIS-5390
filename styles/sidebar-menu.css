@@ -1,0 +1,31 @@
+/* Force avatar to be a perfect circle */
+.user-avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.user-avatar-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+
+    /* Force the button to act like a circle container */
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+}
+
+.user-avatar-btn img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
+}
