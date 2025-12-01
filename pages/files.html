@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Files - Microsoft Teams</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/files.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <header>
+        <div data-include="../components/topbar.html"></div>
+    </header>
+
+    <!-- Sidebar -->
+    <nav>
+        <div data-include="../components/sidebar.html"></div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Sidebar - File Navigation -->
+        <aside class="left-sidebar">
+            <div class="sidebar-header">
+                <h2>Files</h2>
+                <div class="sidebar-actions">
+                    <button class="icon-btn" title="Upload" id="upload-btn">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                    <button class="icon-btn" title="New folder">
+                        <i class="fas fa-folder-plus"></i>
+                    </button>
+                    <button class="icon-btn" title="More options">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search files" id="file-search">
+            </div>
+
+            <div class="files-nav">
+                <div class="files-section">
+                    <button class="files-nav-item active" data-section="recent">
+                        <i class="fas fa-clock"></i>
+                        <span>Recent</span>
+                    </button>
+                    <button class="files-nav-item" data-section="teams">
+                        <i class="fas fa-users"></i>
+                        <span>Microsoft Teams</span>
+                    </button>
+                    <button class="files-nav-item" data-section="onedrive">
+                        <i class="fas fa-cloud"></i>
+                        <span>OneDrive</span>
+                    </button>
+                    <button class="files-nav-item" data-section="downloads">
+                        <i class="fas fa-download"></i>
+                        <span>Downloads</span>
+                    </button>
+                    <button class="files-nav-item" data-section="shared">
+                        <i class="fas fa-share-nodes"></i>
+                        <span>Shared with me</span>
+                    </button>
+                </div>
+
+                <div class="files-section">
+                    <div class="files-section-title">Teams & Channels</div>
+                    <button class="files-nav-item" data-team="innovatesync">
+                        <div class="team-avatar-small">IS</div>
+                        <span>InnovateSync</span>
+                    </button>
+                    <button class="files-nav-item" data-team="projectmgmt">
+                        <div class="team-avatar-small">PM</div>
+                        <span>Project Management</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area - File Browser -->
+        <main class="content-area">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="channel-info">
+                    <div class="breadcrumb">
+                        <span class="breadcrumb-item">Files</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span class="breadcrumb-item active">Recent</span>
+                    </div>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="view-toggle" data-view="grid" title="Grid view">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-toggle active" data-view="list" title="List view">
+                        <i class="fas fa-list"></i>
+                    </button>
+                    <button class="icon-btn" title="Sort">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                    <button class="icon-btn" title="Filter">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- File Actions Bar -->
+            <div class="file-actions-bar">
+                <button class="action-btn" id="new-file-btn">
+                    <i class="fas fa-file-plus"></i>
+                    New
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-upload"></i>
+                    Upload
+                </button>
+                <button class="action-btn" disabled>
+                    <i class="fas fa-share"></i>
+                    Share
+                </button>
+                <button class="action-btn" disabled>
+                    <i class="fas fa-download"></i>
+                    Download
+                </button>
+                <button class="action-btn" disabled>
+                    <i class="fas fa-trash"></i>
+                    Delete
+                </button>
+            </div>
+
+            <!-- Files Grid/List -->
+            <div class="files-container list-view">
+                <!-- File List Header -->
+                <div class="file-list-header">
+                    <div class="file-col-name">
+                        <input type="checkbox" id="select-all">
+                        <span>Name</span>
+                    </div>
+                    <div class="file-col-modified">Modified</div>
+                    <div class="file-col-size">Size</div>
+                    <div class="file-col-shared">Shared by</div>
+                </div>
+
+                <!-- Files List -->
+                <div class="files-list">
+                    <!-- Folder Items -->
+                    <div class="file-item folder" data-name="Design Documents">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-folder file-icon"></i>
+                            <span class="file-name">Design Documents</span>
+                        </div>
+                        <div class="file-col-modified">Yesterday</div>
+                        <div class="file-col-size">—</div>
+                        <div class="file-col-shared">—</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item folder" data-name="Marketing Assets">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-folder file-icon"></i>
+                            <span class="file-name">Marketing Assets</span>
+                        </div>
+                        <div class="file-col-modified">3 days ago</div>
+                        <div class="file-col-size">—</div>
+                        <div class="file-col-shared">—</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <!-- File Items -->
+                    <div class="file-item" data-name="Q4_Presentation.pptx">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-powerpoint file-icon powerpoint"></i>
+                            <span class="file-name">Q4_Presentation.pptx</span>
+                        </div>
+                        <div class="file-col-modified">2 hours ago</div>
+                        <div class="file-col-size">4.2 MB</div>
+                        <div class="file-col-shared">Sarah Johnson</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="Budget_Report.xlsx">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-excel file-icon excel"></i>
+                            <span class="file-name">Budget_Report.xlsx</span>
+                        </div>
+                        <div class="file-col-modified">5 hours ago</div>
+                        <div class="file-col-size">1.8 MB</div>
+                        <div class="file-col-shared">Michael Chen</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="Project_Proposal.docx">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-word file-icon word"></i>
+                            <span class="file-name">Project_Proposal.docx</span>
+                        </div>
+                        <div class="file-col-modified">Yesterday</div>
+                        <div class="file-col-size">856 KB</div>
+                        <div class="file-col-shared">Emily Rodriguez</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="meeting_notes.pdf">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-pdf file-icon pdf"></i>
+                            <span class="file-name">meeting_notes.pdf</span>
+                        </div>
+                        <div class="file-col-modified">2 days ago</div>
+                        <div class="file-col-size">324 KB</div>
+                        <div class="file-col-shared">David Kim</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="wireframes.fig">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file file-icon figma"></i>
+                            <span class="file-name">wireframes.fig</span>
+                        </div>
+                        <div class="file-col-modified">3 days ago</div>
+                        <div class="file-col-size">2.4 MB</div>
+                        <div class="file-col-shared">Emily Rodriguez</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="team_photo.jpg">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-image file-icon image"></i>
+                            <span class="file-name">team_photo.jpg</span>
+                        </div>
+                        <div class="file-col-modified">1 week ago</div>
+                        <div class="file-col-size">3.1 MB</div>
+                        <div class="file-col-shared">Lisa Wang</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+
+                    <div class="file-item" data-name="data_analysis.csv">
+                        <div class="file-col-name">
+                            <input type="checkbox" class="file-checkbox">
+                            <i class="fas fa-file-csv file-icon csv"></i>
+                            <span class="file-name">data_analysis.csv</span>
+                        </div>
+                        <div class="file-col-modified">1 week ago</div>
+                        <div class="file-col-size">512 KB</div>
+                        <div class="file-col-shared">Michael Chen</div>
+                        <button class="file-more-btn">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../scripts/include.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/files.js"></script>
+</body>
+</html>
