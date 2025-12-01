@@ -86,7 +86,7 @@
     
         // If currently inside /pages folder, go up one level
         if (pathParts.includes('pages')) {
-            basePath += '';
+            basePath += 'pages/';
         } else {
             basePath += 'pages/';
         }
