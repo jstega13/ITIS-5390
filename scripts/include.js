@@ -113,7 +113,7 @@
                 targetPath = `${basePath}settings.html`;
                 break;
             case 'files':
-                targetPath = `${basePath}Files.html`;
+                targetPath = `${basePath}files.html`;
                 break;
             case 'apps':
                 alert(`${page.charAt(0).toUpperCase() + page.slice(1)} page coming soon!`);
