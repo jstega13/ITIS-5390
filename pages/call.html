@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Call - Live Rooms</title>
+    <link rel="stylesheet" href="../styles/call.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <!-- Root element -->
+    <div id="root">
+        <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #1a1a1a; color: #fff;">
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 16px;">⏳</div>
+                <div>Loading video call...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load React from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Video Call App -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function VideoCall() {
+            const [roomData, setRoomData] = useState(null);
+            const [isMuted, setIsMuted] = useState(false);
+            const [isVideoOff, setIsVideoOff] = useState(false);
+            const [isScreenSharing, setIsScreenSharing] = useState(false);
+            const [showParticipants, setShowParticipants] = useState(false);
+            const [showChat, setShowChat] = useState(false);
+            const [viewMode, setViewMode] = useState('grid');
+            const [chatMessages, setChatMessages] = useState([]);
+            const [newMessage, setNewMessage] = useState('');
+            const [callParticipants, setCallParticipants] = useState([]);
+            const [connectionStrength, setConnectionStrength] = useState('excellent');
+            const [showConnectionWarning, setShowConnectionWarning] = useState(false);
+
+            // Load room data
+            useEffect(() => {
+                const storedRoom = sessionStorage.getItem('activeCallRoom');
+                if (storedRoom) {
+                    const room = JSON.parse(storedRoom);
+                    setRoomData(room);
+                    
+                    const participants = generateParticipants(room.participants - 1);
+                    setCallParticipants([
+                        {
+                            id: 'me',
+                            name: 'You',
+                            isMuted: false,
+                            isVideoOff: false,
+                            isSpeaking: false,
+                            avatarColor: '#6264a7',
+                            isMe: true,
+                            connectionQuality: 'excellent'
+                        },
+                        ...participants
+                    ]);
+
+                    setChatMessages([{
+                        id: 1,
+                        user: 'System',
+                        message: `Welcome to ${room.name}!`,
+                        timestamp: new Date().toLocaleTimeString(),
+                        isSystem: true
+                    }]);
+                } else {
+                    window.location.href = 'live_rooms.html';
+                }
+            }, []);
+
+            // Speaking animation
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setCallParticipants(prev => 
+                        prev.map(p => ({
+                            ...p,
+                            isSpeaking: !p.isMuted && Math.random() > 0.8
+                        }))
+                    );
+                }, 1000);
+                return () => clearInterval(interval);
+            }, []);
+
+            // Connection strength simulation
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    const strengths = ['excellent', 'good', 'fair', 'poor'];
+                    const weights = [60, 25, 10, 5];
+                    
+                    const random = Math.random() * 100;
+                    let cumulative = 0;
+                    let newStrength = 'excellent';
+                    
+                    for (let i = 0; i < strengths.length; i++) {
+                        cumulative += weights[i];
+                        if (random < cumulative) {
+                            newStrength = strengths[i];
+                            break;
+                        }
+                    }
+                    
+                    setConnectionStrength(newStrength);
+                    
+                    if (newStrength === 'poor' || newStrength === 'fair') {
+                        setShowConnectionWarning(true);
+                        setTimeout(() => setShowConnectionWarning(false), 5000);
+                    }
+                }, 8000);
+                return () => clearInterval(interval);
+            }, []);
+
+            function generateParticipants(count) {
+                const names = ['Alice Chen', 'Bob Smith', 'Carol Davis', 'David Kim', 'Emma Wilson'];
+                const avatarColors = ['#6264a7', '#0078d4', '#c239b3', '#00a4ef', '#ff8c00'];
+                const connections = ['excellent', 'good', 'fair'];
+                
+                return Array.from({ length: count }, (_, i) => ({
+                    id: `participant-${i}`,
+                    name: names[i] || `User ${i + 1}`,
+                    isMuted: Math.random() > 0.5,
+                    isVideoOff: Math.random() > 0.7,
+                    isSpeaking: false,
+                    avatarColor: avatarColors[i % avatarColors.length],
+                    connectionQuality: connections[Math.floor(Math.random() * connections.length)]
+                }));
+            }
+
+            function getConnectionInfo() {
+                const info = {
+                    excellent: { bars: 4, color: '#107c10', text: 'Excellent' },
+                    good: { bars: 3, color: '#92c353', text: 'Good' },
+                    fair: { bars: 2, color: '#ffaa44', text: 'Fair' },
+                    poor: { bars: 1, color: '#ff4444', text: 'Poor' }
+                };
+                return info[connectionStrength] || info.excellent;
+            }
+
+            function getParticipantConnectionColor(quality) {
+                const colors = {
+                    excellent: '#107c10',
+                    good: '#92c353',
+                    fair: '#ffaa44',
+                    poor: '#ff4444'
+                };
+                return colors[quality] || '#107c10';
+            }
+
+            const leaveRoom = () => {
+                sessionStorage.removeItem('activeCallRoom');
+                window.location.href = 'live_rooms.html';
+            };
+
+            const toggleMute = () => {
+                setIsMuted(!isMuted);
+                setCallParticipants(prev => 
+                    prev.map(p => p.isMe ? { ...p, isMuted: !isMuted } : p)
+                );
+            };
+
+            const toggleVideo = () => {
+                setIsVideoOff(!isVideoOff);
+                setCallParticipants(prev => 
+                    prev.map(p => p.isMe ? { ...p, isVideoOff: !isVideoOff } : p)
+                );
+            };
+
+            const sendMessage = () => {
+                if (newMessage.trim()) {
+                    setChatMessages([...chatMessages, {
+                        id: chatMessages.length + 1,
+                        user: 'You',
+                        message: newMessage,
+                        timestamp: new Date().toLocaleTimeString(),
+                        isSystem: false
+                    }]);
+                    setNewMessage('');
+                }
+            };
+
+            if (!roomData) {
+                return <div style={{ padding: '40px', textAlign: 'center', color: '#fff' }}>Loading...</div>;
+            }
+
+            const connection = getConnectionInfo();
+
+            return (
+                <div className="call-container">
+                    {showConnectionWarning && (
+                        <div className={`connection-warning ${connectionStrength}`}>
+                            <i className="fas fa-exclamation-triangle"></i>
+                            <span>
+                                {connectionStrength === 'poor' 
+                                    ? 'Poor connection detected. Audio and video quality may be affected.'
+                                    : 'Unstable connection. You may experience interruptions.'}
+                            </span>
+                            <button onClick={() => setShowConnectionWarning(false)} className="warning-close">
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </div>
+                    )}
+
+                    <div className="call-topbar">
+                        <div>
+                            <h2 className="call-room-name">{roomData.name}</h2>
+                            <div className="call-room-meta">
+                                <div className="live-indicator"></div>
+                                {callParticipants.length} participants
+                            </div>
+                        </div>
+
+                        <div className="call-topbar-actions">
+                            <div className="connection-indicator" title={`Connection: ${connection.text}`}>
+                                <div className="connection-bars">
+                                    <div className={`bar bar-1 ${connectionStrength}`}></div>
+                                    <div className={`bar bar-2 ${connectionStrength}`}></div>
+                                    <div className={`bar bar-3 ${connectionStrength}`}></div>
+                                    <div className={`bar bar-4 ${connectionStrength}`}></div>
+                                </div>
+                                <span className="connection-text" style={{ color: connection.color }}>
+                                    {connection.text}
+                                </span>
+                            </div>
+                            
+                            <button
+                                onClick={() => setViewMode(viewMode === 'grid' ? 'speaker' : 'grid')}
+                                className="control-btn secondary"
+                            >
+                                <i className={`fas fa-${viewMode === 'grid' ? 'user' : 'th'}`}></i>
+                                {viewMode === 'grid' ? 'Speaker' : 'Grid'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="call-content">
+                        <div className="video-area">
+                            {isScreenSharing ? (
+                                <div className="screen-share-view">
+                                    <i className="fas fa-desktop screen-share-icon"></i>
+                                    <div className="screen-share-label">
+                                        <i className="fas fa-desktop"></i>
+                                        You are presenting
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className={`video-grid ${viewMode}-view`} style={{
+                                    gridTemplateColumns: viewMode === 'grid' 
+                                        ? `repeat(${Math.ceil(Math.sqrt(callParticipants.length))}, 1fr)`
+                                        : '1fr'
+                                }}>
+                                    {callParticipants.map(participant => (
+                                        <div
+                                            key={participant.id}
+                                            className={`video-tile ${participant.isSpeaking ? 'speaking' : ''}`}
+                                        >
+                                            {participant.isVideoOff ? (
+                                                <div className="video-off" style={{ backgroundColor: participant.avatarColor }}>
+                                                    <div className="participant-avatar">
+                                                        {participant.name.charAt(0)}
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="video-placeholder">
+                                                    <i className="fas fa-video video-placeholder-icon"></i>
+                                                </div>
+                                            )}
+
+                                            {participant.connectionQuality !== 'excellent' && (
+                                                <div 
+                                                    className="tile-connection-badge"
+                                                    style={{ backgroundColor: getParticipantConnectionColor(participant.connectionQuality) }}
+                                                    title={`Connection: ${participant.connectionQuality}`}
+                                                >
+                                                    <i className="fas fa-signal"></i>
+                                                </div>
+                                            )}
+
+                                            <div className="video-tile-footer">
+                                                <span className="participant-name">{participant.name}</span>
+                                                {participant.isMuted && (
+                                                    <i className="fas fa-microphone-slash muted-icon"></i>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {showParticipants && (
+                            <div className="side-panel">
+                                <div className="panel-header">
+                                    <h3>Participants ({callParticipants.length})</h3>
+                                    <button onClick={() => setShowParticipants(false)} className="close-btn">
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div className="panel-content">
+                                    {callParticipants.map(participant => (
+                                        <div key={participant.id} className={`participant-item ${participant.isSpeaking ? 'speaking' : ''}`}>
+                                            <div className="participant-avatar-small" style={{ backgroundColor: participant.avatarColor }}>
+                                                {participant.name.charAt(0)}
+                                            </div>
+                                            <div className="participant-info">
+                                                <div className="participant-name">{participant.name}</div>
+                                            </div>
+                                            <div className="participant-status">
+                                                {participant.isMuted && <i className="fas fa-microphone-slash"></i>}
+                                                {participant.isVideoOff && <i className="fas fa-video-slash"></i>}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {showChat && (
+                            <div className="side-panel">
+                                <div className="panel-header">
+                                    <h3>Chat</h3>
+                                    <button onClick={() => setShowChat(false)} className="close-btn">
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div className="panel-content chat-messages">
+                                    {chatMessages.map(msg => (
+                                        <div key={msg.id} className={`chat-message ${msg.isSystem ? 'system' : ''}`}>
+                                            {!msg.isSystem && (
+                                                <div className="message-sender">{msg.user}</div>
+                                            )}
+                                            <div className="message-text">{msg.message}</div>
+                                            <div className="message-time">{msg.timestamp}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="chat-input-container">
+                                    <input
+                                        type="text"
+                                        value={newMessage}
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                        onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                                        placeholder="Type a message..."
+                                        className="chat-input"
+                                    />
+                                    <button onClick={sendMessage} className="send-btn">Send</button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="control-bar">
+                        <button
+                            onClick={toggleMute}
+                            className={`control-btn ${isMuted ? 'danger' : ''}`}
+                            title={isMuted ? 'Unmute' : 'Mute'}
+                        >
+                            <i className={`fas fa-microphone${isMuted ? '-slash' : ''}`}></i>
+                        </button>
+
+                        <button
+                            onClick={toggleVideo}
+                            className={`control-btn ${isVideoOff ? 'danger' : ''}`}
+                            title={isVideoOff ? 'Turn on camera' : 'Turn off camera'}
+                        >
+                            <i className={`fas fa-video${isVideoOff ? '-slash' : ''}`}></i>
+                        </button>
+
+                        <button
+                            onClick={() => setIsScreenSharing(!isScreenSharing)}
+                            className={`control-btn ${isScreenSharing ? 'active' : ''}`}
+                            title={isScreenSharing ? 'Stop sharing' : 'Share screen'}
+                        >
+                            <i className="fas fa-desktop"></i>
+                        </button>
+
+                        <button
+                            onClick={() => setShowParticipants(!showParticipants)}
+                            className={`control-btn ${showParticipants ? 'active' : ''}`}
+                            title="Participants"
+                        >
+                            <i className="fas fa-users"></i>
+                        </button>
+
+                        <button
+                            onClick={() => setShowChat(!showChat)}
+                            className={`control-btn ${showChat ? 'active' : ''}`}
+                            title="Chat"
+                        >
+                            <i className="fas fa-comments"></i>
+                        </button>
+
+                        <div style={{ flex: 1 }}></div>
+
+                        <button onClick={leaveRoom} className="control-btn leave-btn">
+                            <i className="fas fa-phone-slash"></i>
+                            Leave Room
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<VideoCall />);
+    </script>
+</body>
+</html>
