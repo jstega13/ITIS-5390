@@ -1,15 +1,12 @@
-// scripts/live-rooms.js
+// scripts/live-rooms.js - Updated with Video Call Integration
 
 document.addEventListener("DOMContentLoaded", () => {
-    // ---- Config: where to load the JSON from (relative to pages/live-rooms.html) ----
     const ROOMS_JSON_URL = "../data/data.json";
 
-    // ---- State ----
-    let rooms = [];          // full list from JSON
-    let filteredRooms = [];  // search results
+    let rooms = [];
+    let filteredRooms = [];
     let selectedRoomId = null;
 
-    // ---- DOM elements ----
     const roomsListEl = document.getElementById("rooms-list");
     const searchInputEl = document.getElementById("rooms-search-input");
     const createRoomBtn = document.getElementById("create-room-btn");
@@ -31,9 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const descriptionEl = document.getElementById("room-description-text");
     const activityListEl = document.getElementById("room-activity-list");
 
-    // ---------------------------------------------------------------------
-    // JSON loading
-    // ---------------------------------------------------------------------
+    // Load rooms from JSON
     async function loadRoomsFromJson() {
         try {
             const response = await fetch(ROOMS_JSON_URL);
@@ -46,16 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
             filteredRooms = [...rooms];
 
             renderRoomsList();
-            renderRoomDetail(null); // start with empty state
+            renderRoomDetail(null);
         } catch (err) {
             console.error(err);
             roomsListEl.innerHTML = `<li class="room-list-item" style="opacity:0.7;">Could not load rooms.</li>`;
         }
     }
 
-    // ---------------------------------------------------------------------
-    // Rendering – list + detail
-    // ---------------------------------------------------------------------
     function renderRoomsList() {
         roomsListEl.innerHTML = "";
 
@@ -77,12 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 li.classList.add("active");
             }
 
-            // Avatar
             const avatar = document.createElement("div");
             avatar.className = "room-list-avatar";
             avatar.textContent = getRoomInitials(room.name);
 
-            // Main text stack
             const main = document.createElement("div");
             main.className = "room-list-main";
 
@@ -138,26 +128,19 @@ document.addEventListener("DOMContentLoaded", () => {
         nameEl.textContent = room.name;
         subtitleEl.textContent = room.topic || "";
 
-        // Live pill
         livePillEl.style.display = room.live ? "inline-flex" : "none";
-
-        // Joined pill
         joinedPillEl.style.display = room.joined ? "inline-flex" : "none";
 
-        // Button state
         updateJoinLeaveButton(room);
 
-        // Meta
         metaParticipantsEl.textContent = `${room.participants} active`;
         metaTopicEl.textContent = room.topic || "—";
         metaTypeEl.textContent = room.type || "—";
 
-        // Description
         descriptionEl.textContent =
             room.description ||
             "No description provided for this room.";
 
-        // Activity
         activityListEl.innerHTML = "";
         if (Array.isArray(room.recentActivity) && room.recentActivity.length) {
             room.recentActivity.forEach((entry) => {
@@ -171,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
             activityListEl.appendChild(li);
         }
 
-        // Ensure active selection styling in list stays in sync
         renderRoomsList();
     }
 
@@ -189,9 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ---------------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------------
     function getRoomInitials(name) {
         const parts = name.split(" ").filter(Boolean);
         if (parts.length === 0) return "?";
@@ -206,7 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return rooms.find((r) => r.id === id) || null;
     }
 
-    // Basic JSON search algorithm: search across name, topic, and type.
     function searchRooms(query) {
         const term = query.trim().toLowerCase();
         if (!term) {
@@ -220,14 +198,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 `${room.name} ${room.topic} ${room.type}`
                     .toLowerCase();
 
-            // all tokens must be present
             return tokens.every((tok) => haystack.includes(tok));
         });
     }
 
-    // ---------------------------------------------------------------------
-    // Event wiring
-    // ---------------------------------------------------------------------
+    // ** NEW: Launch Video Call Interface **
+    function launchVideoCall(room) {
+        // Store room data in sessionStorage for the call page
+        sessionStorage.setItem('activeCallRoom', JSON.stringify(room));
+        
+        // Redirect to video call page
+        window.location.href = '../pages/call.html';
+    }
 
     // Click on a room in the list
     roomsListEl.addEventListener("click", (e) => {
@@ -247,16 +229,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const room = findRoomById(selectedRoomId);
         if (!room) return;
 
-        room.joined = !room.joined;
-
-        // Adjust participant count as visual feedback
         if (room.joined) {
-            room.participants += 1;
-        } else {
+            // Leave room
+            room.joined = false;
             room.participants = Math.max(0, room.participants - 1);
+            renderRoomDetail(room);
+        } else {
+            // Join room - Launch video call
+            room.joined = true;
+            room.participants += 1;
+            launchVideoCall(room);
         }
-
-        renderRoomDetail(room);
     });
 
     // Search input
@@ -285,15 +268,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Ad-hoc space created from the Live Rooms page. Use this for quick huddles or focus sessions.",
                 participants: 1,
                 live: true,
-                joined: true,
+                joined: false,
                 recentActivity: [
                     "Room created.",
-                    "You joined the room."
+                    "Ready to join!"
                 ]
             };
 
             rooms.push(newRoom);
-            // Refresh search results using current query
             const currentQuery = searchInputEl ? searchInputEl.value : "";
             filteredRooms = searchRooms(currentQuery);
             renderRoomsList();
@@ -301,8 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ---------------------------------------------------------------------
-    // Init
-    // ---------------------------------------------------------------------
+    // Initialize
     loadRoomsFromJson();
 });
