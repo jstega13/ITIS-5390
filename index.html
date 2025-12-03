@@ -1,87 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microsoft Teams - Home</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <style>
-        /* Fullscreen center layout */
-        body {
+    <meta charset="UTF-8" />
+    <title>Sign in – Teams Prototype</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Built-in CSS -->
+    <style>
+        :root {
+            --teams-bg: #201f4b;
+            --teams-accent: #4b53bc;
+            --teams-accent-light: #6264a7;
+            --input-border: #d1d1d1;
+            --input-focus: #4b53bc;
+            --text-main: #111;
+            --text-subtle: #555;
+            --error: #d13438;
+            --success: #107c10;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #f3f2f1;
-            font-family: "Segoe UI", sans-serif;
+            justify-content: center;
+            background: radial-gradient(circle at top, #3b3c8f 0, #201f4b 45%, #0b0b1f 100%);
+            color: var(--text-main);
+        }
+
+        .login-shell {
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
         }
 
         .login-card {
-            background: white;
-            padding: 40px 50px;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-            width: 360px;
-            text-align: center;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 32px 28px 28px;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.28);
+        }
+
+        .login-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
         }
 
         .login-logo {
-            width: 85px;
-            margin-bottom: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #4b53bc, #6264a7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .login-header-text h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .login-header-text p {
+            font-size: 13px;
+            color: var(--text-subtle);
+            margin-top: 2px;
         }
 
         .login-title {
-            font-size: 24px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 25px;
-            color: #242424;
+            margin-bottom: 10px;
         }
 
-        .login-button {
+        .login-subtitle {
+            font-size: 12px;
+            color: var(--text-subtle);
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .input {
             width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            background: #5059c9;
-            color: white;
-            border: none;
+            padding: 9px 10px;
             border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s ease;
+            border: 1px solid var(--input-border);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .login-button:hover {
-            background: #3e44a8;
+        .input:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 1px rgba(75, 83, 188, 0.35);
+        }
+
+        .hint {
+            font-size: 11px;
+            color: var(--text-subtle);
+            margin-top: 2px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--text-subtle);
+        }
+
+        .checkbox-wrapper input {
+            width: 14px;
+            height: 14px;
+        }
+
+        .link {
+            font-size: 11px;
+            color: var(--teams-accent-light);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            margin-top: 16px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #4b53bc, #6264a7);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(32, 31, 75, 0.45);
+            transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 7px 16px rgba(32, 31, 75, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(32, 31, 75, 0.4);
+            opacity: 0.9;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 18px 0 12px;
+        }
+
+        .divider-line {
+            height: 1px;
+            flex: 1;
+            background: #e3e3e3;
+        }
+
+        .divider-text {
+            font-size: 11px;
+            color: var(--text-subtle);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid #d0d0d0;
+            background: #fafafa;
+            cursor: pointer;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-secondary span.icon-circle {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: #dbe0ff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #4b53bc;
+        }
+
+        .meta {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--text-subtle);
+            text-align: center;
+        }
+
+        .meta strong {
+            font-weight: 600;
+        }
+
+        .message {
+            margin-top: 8px;
+            font-size: 11px;
+            display: none;
+        }
+
+        .message.error {
+            color: var(--error);
+        }
+
+        .message.success {
+            color: var(--success);
+        }
+
+        .forgot-panel {
+            margin-top: 10px;
+            padding: 10px 10px 8px;
+            border-radius: 8px;
+            background: #f7f8ff;
+            border: 1px solid #dde0ff;
+            display: none;
+        }
+
+        .forgot-panel-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .forgot-panel-text {
+            font-size: 11px;
+            color: var(--text-subtle);
+            margin-bottom: 6px;
+        }
+
+        .forgot-panel .actions {
+            margin-top: 6px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .btn-text {
+            border: none;
+            background: transparent;
+            font-size: 11px;
+            color: var(--teams-accent-light);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 11px;
+            border-radius: 999px;
+            border: 1px solid #cfd0ff;
+            background: #e6e7ff;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 24px 20px 22px;
+            }
+
+            .login-header-text h1 {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="login-shell">
+        <div class="login-card">
+            <!-- Header / "Brand" -->
+            <div class="login-header">
+                <div class="login-logo">
+                    T
+                </div>
+                <div class="login-header-text">
+                    <h1>InnovateSync Teams</h1>
+                    <p>UI prototype – sign in to continue</p>
+                </div>
+            </div>
 
-    <div class="login-card">
-        <!-- Teams Logo -->
-        <svg class="login-logo" viewBox="0 0 2228.833 2073.333" xmlns="http://www.w3.org/2000/svg">
-            <g transform="translate(-5.5 -11.333)">
-                <circle cx="1118.5" cy="1011.333" r="1011.333" fill="#5059c9"/>
-                <path d="M1667.5 1011.333a549 549 0 1 1-549-549 549 549 0 0 1 549 549z" fill="#7b83eb"/>
-                <circle cx="1118.5" cy="1011.333" r="440.583" fill="#fff"/>
-                <path d="M1118.5 570.75v881.167" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                <path d="M678.917 1011.333h881.166" stroke="#5059c9" stroke-width="108.333" stroke-linecap="round"/>
-                <circle cx="1118.5" cy="1011.333" r="220.292" fill="#5059c9"/>
-                <text x="1118.5" y="1150" font-family="Segoe UI, sans-serif" font-size="400" font-weight="600" fill="#fff" text-anchor="middle">T</text>
-            </g>
-        </svg>
+            <!-- Title / Subtitle -->
+            <div class="login-title">Sign in</div>
+            <div class="login-subtitle">
+                For this prototype, the only valid credentials are
+                <strong>user / user</strong>.
+            </div>
 
-        <h1 class="login-title">Sign in to Microsoft Teams</h1>
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email or username</label>
+                <input
+                    id="email"
+                    type="text"
+                    class="input"
+                    placeholder="user"
+                />
+                <div class="hint">
+                    This is a fake login screen for a class project. Do not enter real passwords.
+                </div>
+            </div>
 
-        <!-- Login Button -->
-        <button class="login-button" onclick="window.location.href='pages/index.html'">
-            Login
-        </button>
+            <!-- Password + remember / forgot row -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    class="input"
+                    placeholder="user"
+                />
+                <div class="row">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="remember" />
+                        <label for="remember">Keep me signed in (demo)</label>
+                    </div>
+                    <a class="link" onclick="openForgotPassword(event)">Forgot password?</a>
+                </div>
+
+                <!-- Error / info message -->
+                <div class="message error" id="login-message"></div>
+            </div>
+
+            <!-- Primary sign in button -->
+            <button class="btn-primary" type="button" onclick="fakeLogin()">
+                Sign in
+            </button>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">or</div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Secondary org sign-in -->
+            <button class="btn-secondary" type="button" onclick="signInWithSchool()">
+                <span class="icon-circle">🏫</span>
+                Sign in with school account (demo)
+            </button>
+
+            <!-- Forgot password panel (same page) -->
+            <div class="forgot-panel" id="forgot-panel">
+                <div class="forgot-panel-title">Reset your password (demo)</div>
+                <div class="forgot-panel-text">
+                    In the real app this would email you a reset link. Here, it just shows how the flow would look.
+                </div>
+                <label for="forgot-email" style="font-size:11px; margin-bottom:3px;">School or work email</label>
+                <input
+                    id="forgot-email"
+                    type="email"
+                    class="input"
+                    placeholder="you@example.edu"
+                    style="font-size:12px; padding:7px 9px;"
+                />
+                <div class="forgot-panel-text" id="forgot-message"></div>
+                <div class="actions">
+                    <button class="btn-text" type="button" onclick="closeForgotPassword()">Cancel</button>
+                    <button class="btn-small" type="button" onclick="sendResetLink()">Send reset link</button>
+                </div>
+            </div>
+
+            <div class="meta">
+                <strong>Prototype only.</strong> “Sign in” with <strong>user / user</strong>,
+                or use the school account button to jump into the main UI.
+            </div>
+        </div>
     </div>
 
+    <script>
+        const MAIN_APP_URL = "/pages/index.html";
+
+        const CORRECT_USER = "user";
+        const CORRECT_PASS = "user";
+
+        const loginMessageEl = document.getElementById("login-message");
+        const forgotPanel = document.getElementById("forgot-panel");
+        const forgotMessageEl = document.getElementById("forgot-message");
+
+        function clearLoginMessage() {
+            loginMessageEl.style.display = "none";
+            loginMessageEl.textContent = "";
+        }
+
+        function showLoginError(msg) {
+            loginMessageEl.textContent = msg;
+            loginMessageEl.classList.remove("success");
+            loginMessageEl.classList.add("error");
+            loginMessageEl.style.display = "block";
+        }
+
+        function fakeLogin() {
+            clearLoginMessage();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (email === CORRECT_USER && password === CORRECT_PASS) {
+                // Successful demo login
+                window.location.href = MAIN_APP_URL;
+            } else {
+                showLoginError(
+                    "Incorrect username or password. For this demo, use: user / user."
+                );
+            }
+        }
+
+        function signInWithSchool() {
+            // Alternate path: always "works" for demo
+            window.location.href = MAIN_APP_URL;
+        }
+
+        function openForgotPassword(event) {
+            if (event) event.preventDefault();
+            const emailField = document.getElementById("email");
+            const forgotEmailField = document.getElementById("forgot-email");
+            if (emailField.value.trim() !== "") {
+                forgotEmailField.value = emailField.value.trim();
+            }
+            forgotMessageEl.textContent = "";
+            forgotPanel.style.display = "block";
+        }
+
+        function closeForgotPassword() {
+            forgotPanel.style.display = "none";
+        }
+
+        function sendResetLink() {
+            const email = document.getElementById("forgot-email").value.trim();
+            if (!email) {
+                forgotMessageEl.style.color = "#d13438";
+                forgotMessageEl.textContent = "Please enter an email to continue.";
+                return;
+            }
+            // Demo success message
+            forgotMessageEl.style.color = "#107c10";
+            forgotMessageEl.textContent =
+                "If this were live, a reset link would be sent to " + email + ".";
+        }
+
+        // Optional: allow Enter key to trigger login
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                fakeLogin();
+            }
+        });
+    </script>
 </body>
 </html>

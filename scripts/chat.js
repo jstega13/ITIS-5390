@@ -1,292 +1,431 @@
-// Chat-specific JavaScript
+// =======================================
+// InnovateSync Chat – Sarah only + popups
+// =======================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    initializeChatList();
-    initializeChatCompose();
-    initializeChatFilters();
+document.addEventListener('DOMContentLoaded', () => {
+    initChatSend();
+    initSearch();
+    initFilterButtons();
+    initButtonPopups();
+    initReactionDelegation();
+    console.log('Chat prototype ready (Sarah only + popups).');
 });
 
-// Chat List Interactions
-function initializeChatList() {
-    const chatItems = document.querySelectorAll('.chat-item');
-    
-    chatItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove active class from all chats
-            chatItems.forEach(chat => chat.classList.remove('active'));
-            // Add active class to clicked chat
-            this.classList.add('active');
-            // Remove unread status
-            this.classList.remove('unread');
-            
-            // Update the top bar with chat info
-            updateChatHeader(this);
-        });
-    });
-}
-
-// Update Chat Header
-function updateChatHeader(chatItem) {
-    const chatName = chatItem.querySelector('.chat-name').textContent;
-    const chatAvatar = chatItem.querySelector('.chat-avatar, .group-avatar');
-    const chatStatus = chatItem.querySelector('.chat-status');
-    
-    const topBarInfo = document.querySelector('.channel-info');
-    const topBarAvatar = topBarInfo.querySelector('.top-bar-avatar');
-    const topBarTitle = topBarInfo.querySelector('h1');
-    const topBarStatus = topBarInfo.querySelector('.channel-description');
-    
-    if (topBarTitle) {
-        topBarTitle.textContent = chatName;
-    }
-    
-    if (topBarAvatar && chatAvatar) {
-        if (chatAvatar.classList.contains('chat-avatar')) {
-            topBarAvatar.src = chatAvatar.src;
-            topBarAvatar.style.display = 'block';
-        } else {
-            topBarAvatar.style.display = 'none';
-        }
-    }
-    
-    if (topBarStatus && chatStatus) {
-        const statusIndicator = topBarStatus.querySelector('.status-indicator');
-        if (statusIndicator) {
-            statusIndicator.className = 'status-indicator';
-            if (chatStatus.classList.contains('online')) {
-                statusIndicator.classList.add('online');
-                topBarStatus.innerHTML = '<span class="status-indicator online"></span>Available';
-            } else if (chatStatus.classList.contains('away')) {
-                statusIndicator.classList.add('away');
-                topBarStatus.innerHTML = '<span class="status-indicator away"></span>Away';
-            } else if (chatStatus.classList.contains('busy')) {
-                statusIndicator.classList.add('busy');
-                topBarStatus.innerHTML = '<span class="status-indicator busy"></span>Busy';
-            } else {
-                statusIndicator.classList.add('offline');
-                topBarStatus.innerHTML = '<span class="status-indicator offline"></span>Offline';
-            }
-        }
-    }
-}
-
-// Chat Compose
-function initializeChatCompose() {
-    const composeInput = document.querySelector('.compose-input');
-    const sendBtn = document.querySelector('.send-btn');
-    
-    if (sendBtn && composeInput) {
-        sendBtn.addEventListener('click', function() {
-            const message = composeInput.value.trim();
-            if (message) {
-                sendChatMessage(message);
-                composeInput.value = '';
-            }
-        });
-        
-        // Send on Enter (without Shift)
-        composeInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                const message = this.value.trim();
-                if (message) {
-                    sendChatMessage(message);
-                    this.value = '';
-                }
-            }
-        });
-        
-        // Show typing indicator
-        let typingTimeout;
-        composeInput.addEventListener('input', function() {
-            clearTimeout(typingTimeout);
-            // In a real app, you would send a "typing" event to the server
-            typingTimeout = setTimeout(() => {
-                // Stop typing indicator
-            }, 1000);
-        });
-    }
-}
-
-// Send Chat Message
-function sendChatMessage(messageText) {
-    const messagesContainer = document.querySelector('.messages-container');
-    const currentTime = new Date().toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit',
-        hour12: true 
-    });
-    
-    // Remove typing indicator if present
-    const typingIndicator = document.querySelector('.typing-indicator');
-    if (typingIndicator) {
-        typingIndicator.style.display = 'none';
-    }
-    
-    const messageHTML = `
-        <div class="message sent">
-            <div class="message-content">
-                <div class="message-header">
-                    <span class="message-time">${currentTime}</span>
-                </div>
-                <div class="message-body">
-                    <p>${escapeHtml(messageText)}</p>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    
-    // Simulate response after a delay
-    setTimeout(() => {
-        if (typingIndicator) {
-            typingIndicator.style.display = 'flex';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-        
-        setTimeout(() => {
-            simulateResponse();
-        }, 2000);
-    }, 1000);
-}
-
-// Simulate Response
-function simulateResponse() {
-    const messagesContainer = document.querySelector('.messages-container');
-    const currentTime = new Date().toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit',
-        hour12: true 
-    });
-    
-    const responses = [
-        "That sounds great! Let me know if you need any help.",
-        "Thanks for the update! 👍",
-        "I'll take a look at that right away.",
-        "Perfect timing! I was just about to ask you about that.",
-        "Absolutely! When would be a good time to discuss?"
-    ];
-    
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    
-    const typingIndicator = document.querySelector('.typing-indicator');
-    if (typingIndicator) {
-        typingIndicator.style.display = 'none';
-    }
-    
-    const messageHTML = `
-        <div class="message received">
-            <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
-            <div class="message-content">
-                <div class="message-header">
-                    <span class="message-author">Sarah Johnson</span>
-                    <span class="message-time">${currentTime}</span>
-                </div>
-                <div class="message-body">
-                    <p>${randomResponse}</p>
-                </div>
-                <div class="message-reactions">
-                    <button class="reaction-add">
-                        <i class="far fa-smile"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    messagesContainer.insertAdjacentHTML('beforeend', messageHTML);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    
-    // Update chat preview in sidebar
-    updateChatPreview(randomResponse, currentTime);
-}
-
-// Update Chat Preview in Sidebar
-function updateChatPreview(message, time) {
-    const activeChat = document.querySelector('.chat-item.active');
-    if (activeChat) {
-        const chatMessage = activeChat.querySelector('.chat-message');
-        const chatTime = activeChat.querySelector('.chat-time');
-        
-        if (chatMessage) {
-            chatMessage.textContent = message;
-        }
-        if (chatTime) {
-            chatTime.textContent = time;
-        }
-    }
-}
-
-// Chat Filters
-function initializeChatFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active class from all filters
-            filterBtns.forEach(filter => filter.classList.remove('active'));
-            // Add active class to clicked filter
-            this.classList.add('active');
-            
-            const filterType = this.textContent.toLowerCase();
-            filterChats(filterType);
-        });
-    });
-}
-
-// Filter Chats
-function filterChats(filterType) {
-    const chatItems = document.querySelectorAll('.chat-item');
-    
-    chatItems.forEach(item => {
-        switch(filterType) {
-            case 'all':
-                item.style.display = 'flex';
-                break;
-            case 'unread':
-                if (item.classList.contains('unread')) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-                break;
-            case 'meetings':
-                // In a real app, you would filter by meeting chats
-                item.style.display = 'none';
-                break;
-            default:
-                item.style.display = 'flex';
-        }
-    });
-}
-
-// Search Chats
-const chatSearchInput = document.querySelector('.search-box input');
-if (chatSearchInput) {
-    chatSearchInput.addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const chatItems = document.querySelectorAll('.chat-item');
-        
-        chatItems.forEach(item => {
-            const chatName = item.querySelector('.chat-name').textContent.toLowerCase();
-            const chatMessage = item.querySelector('.chat-message').textContent.toLowerCase();
-            
-            if (chatName.includes(searchTerm) || chatMessage.includes(searchTerm)) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-}
-
-// Utility function
+// ---------------------------
+// Utility helpers
+// ---------------------------
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
 
-console.log('Chat functionality initialized!');
+function formatTime() {
+    return new Date().toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+}
+
+// ---------------------------
+// Sending + reply simulation
+// ---------------------------
+function initChatSend() {
+    const input     = document.getElementById('compose-input');
+    const sendBtn   = document.getElementById('send-btn');
+    const container = document.getElementById('messages-container');
+
+    if (!input || !sendBtn || !container) return;
+
+    sendBtn.addEventListener('click', () => {
+        const text = input.value.trim();
+        if (!text) return;
+        appendSentMessage(text);
+        input.value = '';
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            const text = input.value.trim();
+            if (!text) return;
+            appendSentMessage(text);
+            input.value = '';
+        }
+    });
+}
+
+function appendSentMessage(text) {
+    const container = document.getElementById('messages-container');
+    if (!container) return;
+
+    const time = formatTime();
+    const safe = escapeHtml(text);
+
+    // Hide typing indicator if somehow visible
+    const typing = document.getElementById('typing-indicator');
+    if (typing) typing.style.display = 'none';
+
+    const html = `
+        <div class="message sent">
+            <div class="message-content">
+                <div class="message-header">
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-body">
+                    <p>${safe}</p>
+                </div>
+            </div>
+        </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', html);
+    container.scrollTop = container.scrollHeight;
+
+    // Update chat sidebar preview + time
+    const chatItem  = document.querySelector('.chat-item');
+    const previewEl = chatItem?.querySelector('.chat-message');
+    const timeEl    = chatItem?.querySelector('.chat-time');
+
+    if (previewEl) previewEl.textContent = text;
+    if (timeEl)    timeEl.textContent    = time;
+
+    simulateSarahReply();
+}
+
+function simulateSarahReply() {
+    const container = document.getElementById('messages-container');
+    const typing    = document.getElementById('typing-indicator');
+    if (!container || !typing) return;
+
+    // Show typing indicator for Sarah
+    typing.style.display = 'flex';
+    container.scrollTop = container.scrollHeight;
+
+    const replies = [
+        "Got it, thanks for the quick response!",
+        "Nice, that sounds perfect.",
+        "Okay, I'll adjust the timeline based on that.",
+        "Perfect, I’ll add that to the deck.",
+        "Thanks! I’ll review it and let you know."
+    ];
+    const reply = replies[Math.floor(Math.random() * replies.length)];
+
+    setTimeout(() => {
+        typing.style.display = 'none';
+
+        const time      = formatTime();
+        const safeReply = escapeHtml(reply);
+
+        const html = `
+            <div class="message received">
+                <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                     alt="Sarah Johnson" class="message-avatar">
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">Sarah Johnson</span>
+                        <span class="message-time">${time}</span>
+                    </div>
+                    <div class="message-body">
+                        <p>${safeReply}</p>
+                    </div>
+                    <div class="message-reactions">
+                        <button class="reaction">👍 1</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+        container.scrollTop = container.scrollHeight;
+
+        // Update sidebar preview
+        const chatItem  = document.querySelector('.chat-item');
+        const previewEl = chatItem?.querySelector('.chat-message');
+        const timeEl    = chatItem?.querySelector('.chat-time');
+
+        if (previewEl) previewEl.textContent = reply;
+        if (timeEl)    timeEl.textContent    = time;
+    }, 1200);
+}
+
+// ---------------------------
+// Search (even with one chat)
+// ---------------------------
+function initSearch() {
+    const input = document.getElementById('chat-search-input');
+    if (!input) return;
+
+    input.addEventListener('input', () => {
+        const term = input.value.toLowerCase();
+        const item = document.querySelector('.chat-item');
+        if (!item) return;
+
+        const name    = item.querySelector('.chat-name')?.textContent.toLowerCase() || '';
+        const preview = item.querySelector('.chat-message')?.textContent.toLowerCase() || '';
+
+        if (!term || name.includes(term) || preview.includes(term)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// ---------------------------
+// Filter buttons (All/Unread/Meetings)
+// ---------------------------
+function initFilterButtons() {
+    const buttons  = document.querySelectorAll('.filter-btn');
+    const chatItem = document.querySelector('.chat-item');
+    if (!buttons.length || !chatItem) return;
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const label = btn.textContent.trim().toLowerCase();
+
+            if (label === 'unread') {
+                chatItem.style.display = chatItem.classList.contains('unread') ? 'flex' : 'none';
+            } else if (label === 'meetings') {
+                // Prototype: no meeting chats, so hide
+                chatItem.style.display = 'none';
+            } else {
+                // "All" or anything else
+                chatItem.style.display = 'flex';
+            }
+        });
+    });
+}
+
+// ---------------------------
+// Button popups (ALL buttons with title)
+// ---------------------------
+function initButtonPopups() {
+    document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+
+        const title = btn.getAttribute('title');
+        if (!title) return;
+
+        const [popupTitle, popupMsg] = getPopupTextFromTitle(title);
+        showDemoPopup(popupTitle, popupMsg);
+    });
+}
+
+function getPopupTextFromTitle(title) {
+    const key = title.toLowerCase().trim();
+
+    switch (key) {
+        // Sidebar header
+        case 'new chat':
+            return [
+                'New chat',
+                'In a real client, this would open a people picker to start a new conversation.'
+            ];
+        case 'filter':
+            return [
+                'Filter chats',
+                'This would open advanced filters for unread, mentions, meetings, and more.'
+            ];
+        case 'more options':
+            return [
+                'More chat options',
+                'This would show pin, mute, hide, and notification settings for your chats.'
+            ];
+
+        // Chat filters
+        case 'show all chats':
+            return [
+                'All chats',
+                'Shows all conversations in your chat list.'
+            ];
+        case 'show only unread chats':
+            return [
+                'Unread chats',
+                'Would filter the chat list to show only conversations with unread messages.'
+            ];
+        case 'show meeting-related chats':
+            return [
+                'Meeting chats',
+                'Would filter to chats that are associated with meetings.'
+            ];
+
+        // Top bar in chat
+        case 'video call':
+            return [
+                'Video call',
+                'Would start a video meeting with Sarah directly from this chat.'
+            ];
+        case 'audio call':
+            return [
+                'Audio call',
+                'Would start an audio-only call with Sarah.'
+            ];
+        case 'screen share':
+            return [
+                'Share screen',
+                'Would let you share a window or your entire screen in a call.'
+            ];
+        case 'add people':
+            return [
+                'Add people',
+                'Would let you turn this 1:1 chat into a group conversation by adding others.'
+            ];
+
+        // Compose header
+        case 'format':
+            return [
+                'Format message',
+                'Would open a rich text editor with headings, bullet lists, and more formatting tools.'
+            ];
+        case 'attach file':
+            return [
+                'Attach file',
+                'Would open a file picker to attach files from your device or OneDrive.'
+            ];
+        case 'emoji':
+            return [
+                'Emoji picker',
+                'Would open an emoji panel so you can insert emoji into your message.'
+            ];
+        case 'gif':
+            return [
+                'GIF picker',
+                'Would open a GIF library to send reaction GIFs.'
+            ];
+        case 'sticker':
+            return [
+                'Stickers',
+                'Would open a stickers drawer, including meme packs and custom stickers.'
+            ];
+
+        // Compose footer formatting
+        case 'bold':
+            return [
+                'Bold text',
+                'Would toggle bold formatting on the selected text.'
+            ];
+        case 'italic':
+            return [
+                'Italic text',
+                'Would toggle italic formatting on the selected text.'
+            ];
+        case 'underline':
+            return [
+                'Underline text',
+                'Would underline the selected portion of your message.'
+            ];
+        case 'link':
+            return [
+                'Insert link',
+                'Would let you insert or edit a hyperlink in your message.'
+            ];
+
+        // Send
+        case 'send message':
+        case 'send':
+            return [
+                'Send message',
+                'Sends the text you typed into the chat. Here it also triggers the prototype reply from Sarah.'
+            ];
+
+        default:
+            return [
+                'Prototype control',
+                `In the full app, "${title}" would trigger its real Microsoft Teams feature.`
+            ];
+    }
+}
+
+function showDemoPopup(title, message) {
+    if (!title)   title   = 'Prototype action';
+    if (!message) message = 'This is a demo placeholder for this control.';
+
+    let popup = document.querySelector('.demo-popup');
+    if (!popup) {
+        popup = document.createElement('div');
+        popup.className = 'demo-popup';
+        popup.innerHTML = `
+            <div class="demo-popup-header">
+                <span class="demo-popup-title"></span>
+                <button class="demo-popup-close" aria-label="Close">&times;</button>
+            </div>
+            <div class="demo-popup-body"></div>
+        `;
+        document.body.appendChild(popup);
+
+        // Basic inline styling so it always shows correctly
+        Object.assign(popup.style, {
+            position: 'fixed',
+            right: '16px',
+            bottom: '16px',
+            maxWidth: '320px',
+            padding: '10px 12px',
+            borderRadius: '8px',
+            background: '#111827',
+            color: '#f9fafb',
+            fontSize: '12px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+            zIndex: 9999,
+            display: 'none'
+        });
+
+        const header = popup.querySelector('.demo-popup-header');
+        Object.assign(header.style, {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '4px',
+            fontWeight: '600'
+        });
+
+        const closeBtn = popup.querySelector('.demo-popup-close');
+        Object.assign(closeBtn.style, {
+            border: 'none',
+            background: 'transparent',
+            color: '#e5e7eb',
+            cursor: 'pointer',
+            fontSize: '14px',
+            padding: 0,
+            margin: 0
+        });
+        closeBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        const body = popup.querySelector('.demo-popup-body');
+        body.style.marginTop = '2px';
+        body.style.lineHeight = '1.4';
+    }
+
+    popup.querySelector('.demo-popup-title').textContent = title;
+    popup.querySelector('.demo-popup-body').textContent  = message;
+    popup.style.display = 'block';
+
+    clearTimeout(popup._timer);
+    popup._timer = setTimeout(() => {
+        popup.style.display = 'none';
+    }, 3500);
+}
+
+// ---------------------------
+// Reactions (on messages)
+// ---------------------------
+function initReactionDelegation() {
+    const container = document.getElementById('messages-container');
+    if (!container) return;
+
+    container.addEventListener('click', (e) => {
+        const reactionBtn = e.target.closest('.reaction');
+        if (reactionBtn) {
+            showDemoPopup(
+                'Message reactions',
+                'In a full client this would show who reacted and let you change your reaction.'
+            );
+        }
+    });
+}

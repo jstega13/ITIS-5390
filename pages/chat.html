@@ -2,25 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Chat – InnovateSync Teams</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat - Microsoft Teams</title>
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/chat.css">
-    <link rel="stylesheet" href="../styles/pages.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Global base styles (variables, nav rail, top logo bar, etc.) -->
+    <link rel="stylesheet" href="../styles/styles.css" />
+
+    <!-- Chat page styles -->
+    <link rel="stylesheet" href="../styles/chat.css" />
+
+    <!-- Optional shared page styles -->
+    <link rel="stylesheet" href="../styles/pages.css" />
+
+    <!-- Font Awesome (icons) -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 </head>
 <body>
-    <!-- Top Bar -->
+    <!-- GLOBAL TOP BAR -->
     <header>
         <div data-include="../components/topbar.html"></div>
     </header>
 
-    <!-- Sidebar -->
+    <!-- GLOBAL LEFT NAV RAIL -->
     <nav>
         <div data-include="../components/sidebar.html"></div>
     </nav>
 
-    <!-- Main Container -->
+    <!-- CHAT MAIN CONTAINER -->
     <div class="main-container">
         <!-- Left Sidebar - Chat List -->
         <aside class="left-sidebar">
@@ -41,18 +52,19 @@
             
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search chats">
+                <input type="text" id="chat-search-input" placeholder="Search chats">
             </div>
 
             <div class="chat-filters">
-                <button class="filter-btn active">All</button>
-                <button class="filter-btn">Unread</button>
-                <button class="filter-btn">Meetings</button>
+                <button class="filter-btn active" title="Show all chats">All</button>
+                <button class="filter-btn" title="Show only unread chats">Unread</button>
+                <button class="filter-btn" title="Show meeting-related chats">Meetings</button>
             </div>
 
             <div class="chats-list">
-                <div class="chat-item active">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="chat-avatar">
+                <div class="chat-item active unread" data-chat-id="sarah">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="chat-avatar">
                     <div class="chat-info">
                         <div class="chat-header">
                             <span class="chat-name">Sarah Johnson</span>
@@ -60,78 +72,7 @@
                         </div>
                         <div class="chat-preview">
                             <span class="chat-message">Thanks for the update! I'll review...</span>
-                        </div>
-                    </div>
-                    <div class="chat-status online"></div>
-                </div>
-
-                <div class="chat-item unread">
-                    <img src="https://ui-avatars.com/api/?name=Michael+Chen&background=6264a7&color=fff" alt="Michael Chen" class="chat-avatar">
-                    <div class="chat-info">
-                        <div class="chat-header">
-                            <span class="chat-name">Michael Chen</span>
-                            <span class="chat-time">1:15 PM</span>
-                        </div>
-                        <div class="chat-preview">
-                            <span class="chat-message">Can we schedule a quick call?</span>
-                            <span class="unread-badge">2</span>
-                        </div>
-                    </div>
-                    <div class="chat-status online"></div>
-                </div>
-
-                <div class="chat-item">
-                    <img src="https://ui-avatars.com/api/?name=Emily+Rodriguez&background=c239b3&color=fff" alt="Emily Rodriguez" class="chat-avatar">
-                    <div class="chat-info">
-                        <div class="chat-header">
-                            <span class="chat-name">Emily Rodriguez</span>
-                            <span class="chat-time">Yesterday</span>
-                        </div>
-                        <div class="chat-preview">
-                            <span class="chat-message">The designs look great! 🎨</span>
-                        </div>
-                    </div>
-                    <div class="chat-status away"></div>
-                </div>
-
-                <div class="chat-item">
-                    <img src="https://ui-avatars.com/api/?name=David+Kim&background=00a4ef&color=fff" alt="David Kim" class="chat-avatar">
-                    <div class="chat-info">
-                        <div class="chat-header">
-                            <span class="chat-name">David Kim</span>
-                            <span class="chat-time">Yesterday</span>
-                        </div>
-                        <div class="chat-preview">
-                            <span class="chat-message">You: Perfect, see you then!</span>
-                        </div>
-                    </div>
-                    <div class="chat-status offline"></div>
-                </div>
-
-                <div class="chat-item">
-                    <div class="group-avatar">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="chat-info">
-                        <div class="chat-header">
-                            <span class="chat-name">Design Team</span>
-                            <span class="chat-time">2 days ago</span>
-                        </div>
-                        <div class="chat-preview">
-                            <span class="chat-message">Emily: I've uploaded the mockups</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chat-item">
-                    <img src="https://ui-avatars.com/api/?name=Lisa+Wang&background=ff8c00&color=fff" alt="Lisa Wang" class="chat-avatar">
-                    <div class="chat-info">
-                        <div class="chat-header">
-                            <span class="chat-name">Lisa Wang</span>
-                            <span class="chat-time">3 days ago</span>
-                        </div>
-                        <div class="chat-preview">
-                            <span class="chat-message">Thanks for your help!</span>
+                            <span class="unread-badge">1</span>
                         </div>
                     </div>
                     <div class="chat-status online"></div>
@@ -141,13 +82,14 @@
 
         <!-- Main Content Area - Chat Conversation -->
         <main class="content-area">
-            <!-- Top Bar -->
+            <!-- Top Bar inside chat -->
             <header class="top-bar">
                 <div class="channel-info">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="top-bar-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="top-bar-avatar" id="channel-avatar">
                     <div>
-                        <h1>Sarah Johnson</h1>
-                        <span class="channel-description">
+                        <h1 id="channel-title">Sarah Johnson</h1>
+                        <span class="channel-description" id="channel-status">
                             <span class="status-indicator online"></span>
                             Available
                         </span>
@@ -173,13 +115,14 @@
             </header>
 
             <!-- Messages Area -->
-            <div class="messages-container">
+            <div class="messages-container" id="messages-container">
                 <div class="date-divider">
                     <span>Today</span>
                 </div>
 
                 <div class="message received">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="message-avatar">
                     <div class="message-content">
                         <div class="message-header">
                             <span class="message-author">Sarah Johnson</span>
@@ -214,7 +157,8 @@
                 </div>
 
                 <div class="message received">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="message-avatar">
                     <div class="message-content">
                         <div class="message-header">
                             <span class="message-author">Sarah Johnson</span>
@@ -238,7 +182,8 @@
                 </div>
 
                 <div class="message received">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="message-avatar">
                     <div class="message-content">
                         <div class="message-header">
                             <span class="message-author">Sarah Johnson</span>
@@ -253,8 +198,9 @@
                     </div>
                 </div>
 
-                <div class="typing-indicator">
-                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff" alt="Sarah Johnson" class="message-avatar">
+                <div class="typing-indicator" id="typing-indicator" style="display:none;">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=0078d4&color=fff"
+                         alt="Sarah Johnson" class="message-avatar">
                     <div class="typing-dots">
                         <span></span>
                         <span></span>
@@ -282,7 +228,7 @@
                         <i class="fas fa-sticky-note"></i>
                     </button>
                 </div>
-                <textarea class="compose-input" placeholder="Type a message"></textarea>
+                <textarea class="compose-input" id="compose-input" placeholder="Type a message"></textarea>
                 <div class="compose-footer">
                     <div class="compose-actions-left">
                         <button class="icon-btn-small" title="Bold">
@@ -298,7 +244,7 @@
                             <i class="fas fa-link"></i>
                         </button>
                     </div>
-                    <button class="send-btn">
+                    <button class="send-btn" id="send-btn" title="Send message">
                         <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
@@ -306,6 +252,7 @@
         </main>
     </div>
 
+    <!-- Scripts -->
     <script src="../scripts/include.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/chat.js"></script>

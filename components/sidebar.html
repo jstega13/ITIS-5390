@@ -37,8 +37,31 @@
 
       <div class="user-avatar-wrapper">
     <button class="user-avatar-btn" id="user-avatar-btn" aria-haspopup="true" aria-expanded="false">
-            <img src="https://ui-avatars.com/api/?name=User&background=6264a7&color=fff" alt="User">
+            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6264a7&color=fff&size=120" alt="User" id="user-avatar-img">
+            <span class="user-status-indicator" id="user-status-indicator"></span>
     </button>
+    
+    <!-- Status Popup Menu -->
+    <div class="status-popup-menu" id="status-popup-menu" style="display: none;">
+        <div class="status-popup-header">Set your status</div>
+        <button class="status-option" data-status="available">
+            <span class="status-dot status-available"></span>
+            <span class="status-label">Available</span>
+        </button>
+        <button class="status-option" data-status="busy">
+            <span class="status-dot status-busy"></span>
+            <span class="status-label">Busy</span>
+        </button>
+        <button class="status-option" data-status="away">
+            <span class="status-dot status-away"></span>
+            <span class="status-label">Away</span>
+        </button>
+        <button class="status-option" data-status="offline">
+            <span class="status-dot status-offline"></span>
+            <span class="status-label">Offline</span>
+        </button>
+    </div>
+</div>
 <link rel="stylesheet" href="../styles/sidebar-menu.css">
 
 

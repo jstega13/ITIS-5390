@@ -39,7 +39,7 @@ body {
 
 .teams-logo-small {
     width: 32px;
-    height: 32px;
+    height: auto;
 }
 
 .teams-text {
@@ -59,7 +59,7 @@ body {
 
 /* Main canvas for this page – sits to the right of nav-rail and under top bar */
 .rooms-container {
-    margin-left: 64px;          /* same offset as home-container */
+    margin-left: 0;
     margin-top: 48px;           /* same as top bar height */
     height: calc(100vh - 48px);
     display: flex;

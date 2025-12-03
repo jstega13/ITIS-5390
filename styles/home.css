@@ -36,7 +36,7 @@ body {
 
 .teams-logo-small {
     width: 32px;
-    height: 32px;
+    height: auto;
 }
 
 .teams-text {
@@ -61,7 +61,7 @@ body {
     justify-content: center;
     background: linear-gradient(135deg, #f3f2f1 0%, #e8e6e4 100%);
 }
-}
+
 
 .home-content {
     display: flex;
@@ -73,8 +73,8 @@ body {
 }
 
 .teams-logo-large {
-    width: 200px;
-    height: 200px;
+    max-width: 400px;
+    height: auto;
     margin-bottom: 32px;
     animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 10px 30px rgba(98, 100, 167, 0.3));
@@ -119,8 +119,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .teams-logo-large {
-        width: 150px;
-        height: 150px;
+        max-width: 300px;
     }
     
     .home-title {
@@ -143,8 +142,7 @@ body {
 
 @media (max-width: 480px) {
     .teams-logo-large {
-        width: 120px;
-        height: 120px;
+        max-width: 200px;
     }
     
     .home-title {

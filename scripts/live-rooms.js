@@ -116,13 +116,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!room) {
             selectedRoomId = null;
             emptyStateEl.style.display = "block";
-            detailEl.hidden = true;
+            detailEl.style.display = "none";
             return;
         }
 
         selectedRoomId = room.id;
         emptyStateEl.style.display = "none";
-        detailEl.hidden = false;
+        detailEl.style.display = "flex";
 
         avatarEl.textContent = getRoomInitials(room.name);
         nameEl.textContent = room.name;

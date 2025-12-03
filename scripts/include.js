@@ -25,6 +25,11 @@
                         // After loading, initialize navigation
                         if (file.includes('topbar') || file.includes('sidebar')) {
                             initializeNavigation();
+                            
+                            // Initialize user status if sidebar was loaded
+                            if (file.includes('sidebar')) {
+                                initializeUserStatus();
+                            }
                         }
                     } else {
                         console.error(`Failed to load ${file}: ${xhr.status}`);
@@ -144,6 +149,67 @@
                 item.classList.add('active');
             }
         });
+    }
+
+    // Initialize user status popup functionality
+    function initializeUserStatus() {
+        setTimeout(() => {
+            const avatarBtn = document.getElementById('user-avatar-btn');
+            const statusPopup = document.getElementById('status-popup-menu');
+            const statusIndicator = document.getElementById('user-status-indicator');
+            const statusOptions = document.querySelectorAll('.status-option');
+
+            if (!avatarBtn || !statusPopup || !statusIndicator) {
+                console.log('Status elements not found');
+                return;
+            }
+
+            // Load saved status from localStorage or default to 'available'
+            let currentStatus = localStorage.getItem('userStatus') || 'available';
+            updateStatusIndicator(currentStatus);
+
+            // Toggle popup when avatar is clicked
+            avatarBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const isVisible = statusPopup.style.display === 'block';
+                statusPopup.style.display = isVisible ? 'none' : 'block';
+                console.log('Avatar clicked, popup:', statusPopup.style.display);
+            });
+
+            // Handle status option clicks
+            statusOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const status = this.getAttribute('data-status');
+                    currentStatus = status;
+                    localStorage.setItem('userStatus', status);
+                    updateStatusIndicator(status);
+                    statusPopup.style.display = 'none';
+                    console.log('Status changed to:', status);
+                });
+            });
+
+            // Close popup when clicking outside
+            document.addEventListener('click', function(e) {
+                if (statusPopup && !statusPopup.contains(e.target) && !avatarBtn.contains(e.target)) {
+                    statusPopup.style.display = 'none';
+                }
+            });
+
+            function updateStatusIndicator(status) {
+                if (!statusIndicator) return;
+                
+                // Remove all status classes
+                statusIndicator.classList.remove('status-available', 'status-busy', 'status-away', 'status-offline');
+                
+                // Add the current status class
+                statusIndicator.classList.add('status-' + status);
+            }
+
+            console.log('User status initialized');
+        }, 100);
     }
 
     // Initialize when DOM is ready

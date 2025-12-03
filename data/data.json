@@ -7,7 +7,7 @@
       "description": "Drop in to sketch flows, review Figma frames, and test new interaction patterns together.",
       "participants": 7,
       "live": true,
-      "joined": true,
+      "joined": false,
       "recentActivity": [
         "Julian joined from Desktop.",
         "Ryan shared a new prototype link.",
