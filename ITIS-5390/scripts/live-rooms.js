@@ -250,22 +250,67 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Create a new room
+    // Modal elements
+    const modal = document.getElementById("create-room-modal");
+    const modalCloseBtn = document.getElementById("modal-close-btn");
+    const cancelBtn = document.getElementById("cancel-btn");
+    const createRoomForm = document.getElementById("create-room-form");
+    const roomNameInput = document.getElementById("room-name");
+    const roomTopicInput = document.getElementById("room-topic");
+    const roomDescriptionInput = document.getElementById("room-description");
+
+    // Open modal when create room button is clicked
     if (createRoomBtn) {
         createRoomBtn.addEventListener("click", () => {
-            const name = prompt("Name your new room:");
-            if (!name) return;
+            modal.style.display = "flex";
+            // Clear form
+            createRoomForm.reset();
+            // Focus on first input
+            setTimeout(() => roomNameInput.focus(), 100);
+        });
+    }
 
-            const trimmed = name.trim();
-            if (!trimmed) return;
+    // Close modal functions
+    function closeModal() {
+        modal.style.display = "none";
+        createRoomForm.reset();
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener("click", closeModal);
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", closeModal);
+    }
+
+    // Close modal when clicking outside
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Handle form submission
+    if (createRoomForm) {
+        createRoomForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = roomNameInput.value.trim();
+            const topic = roomTopicInput.value.trim();
+            const description = roomDescriptionInput.value.trim();
+
+            if (!name || !topic) {
+                alert("Please fill in all required fields.");
+                return;
+            }
 
             const newRoom = {
                 id: "room-" + Date.now(),
-                name: trimmed,
-                topic: "Custom room",
+                name: name,
+                topic: topic,
                 type: "Drop-in",
-                description:
-                    "Ad-hoc space created from the Live Rooms page. Use this for quick huddles or focus sessions.",
+                description: description || "Ad-hoc space created from the Live Rooms page. Use this for quick huddles or focus sessions.",
                 participants: 1,
                 live: true,
                 joined: false,
@@ -280,6 +325,9 @@ document.addEventListener("DOMContentLoaded", () => {
             filteredRooms = searchRooms(currentQuery);
             renderRoomsList();
             renderRoomDetail(newRoom);
+
+            // Close modal
+            closeModal();
         });
     }
 

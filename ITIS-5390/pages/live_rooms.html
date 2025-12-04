@@ -29,6 +29,67 @@
         <div data-include="../components/sidebar.html"></div>
     </nav>
 
+    <!-- CREATE ROOM MODAL -->
+    <div id="create-room-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>Create New Room</h2>
+                <button type="button" class="modal-close-btn" id="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="create-room-form" class="modal-form">
+                <div class="form-group">
+                    <label for="room-name">Room Name <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="room-name" 
+                        name="room-name" 
+                        class="form-input" 
+                        placeholder="e.g., Marketing Sync"
+                        required
+                        maxlength="50"
+                    />
+                    <span class="form-hint">Give your room a clear, descriptive name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="room-topic">Topic <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="room-topic" 
+                        name="room-topic" 
+                        class="form-input" 
+                        placeholder="e.g., Q4 Planning"
+                        required
+                        maxlength="100"
+                    />
+                    <span class="form-hint">What will you discuss in this room?</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="room-description">Description</label>
+                    <textarea 
+                        id="room-description" 
+                        name="room-description" 
+                        class="form-textarea" 
+                        placeholder="Provide additional details about this room..."
+                        rows="4"
+                        maxlength="500"
+                    ></textarea>
+                    <span class="form-hint">Optional: Add more context about the room's purpose</span>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-plus"></i> Create Room
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- LIVE ROOMS MAIN CONTENT -->
     <div class="rooms-container">
         <section class="rooms-layout">

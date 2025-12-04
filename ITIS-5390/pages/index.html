@@ -8,6 +8,57 @@
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <style>
+        /* Popup tooltip styles */
+        .live-rooms-popup {
+            position: fixed;
+            left: 90px;
+            top: 110px;
+            background: #6264a7;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            animation: fadeInOut 3s ease-in-out forwards;
+            pointer-events: none;
+        }
+
+        .live-rooms-popup::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 8px solid #6264a7;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Top Bar -->
@@ -31,5 +82,21 @@
 
     <script src="../scripts/include.js"></script>
     <script src="../scripts/main.js"></script>
+    
+    <script>
+        // Show popup on page load
+        window.addEventListener('load', function() {
+            // Create popup element
+            const popup = document.createElement('div');
+            popup.className = 'live-rooms-popup';
+            popup.textContent = 'This is the Live Room';
+            document.body.appendChild(popup);
+            
+            // Remove popup after 3 seconds
+            setTimeout(function() {
+                popup.remove();
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
