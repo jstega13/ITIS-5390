@@ -53,13 +53,14 @@ body {
 }
 
 .home-container {
-    margin-left: 64px;
-    margin-top: 48px;
-    height: calc(100vh - 48px);
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #f3f2f1 0%, #e8e6e4 100%);
 }
 
 
