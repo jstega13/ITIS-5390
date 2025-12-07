@@ -4,19 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calls – Microsoft Teams</title>
-
-
-   
     <!-- Global styles -->
     <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/pages.css" />
-
-    <!-- Page-specific styles (optional, create this file later if needed) -->
+    <!-- Page-specific styles -->
     <link rel="stylesheet" href="../styles/calls.css" />
-
-    <!-- Sidebar avatar menu styles -->
-    <link rel="stylesheet" href="../styles/sidebar-menu.css" />
-
     <!-- Icons -->
     <link
         rel="stylesheet"
@@ -25,10 +17,15 @@
 </head>
 <body>
     <!-- TOP BAR -->
-    <header id="topbar-container"></header>
+    <header>
+        <div data-include="../components/topbar.html"></div>
+    </header>
 
-    <!-- SIDEBAR -->
-    <nav id="sidebar-container"></nav>
+    <!-- LEFT NAV RAIL -->
+    <nav>
+        <div data-include="../components/sidebar.html"></div>
+    </nav>
+
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
@@ -156,14 +153,9 @@
     </main>
 
     <!-- Component loader & sidebar menu behavior -->
-   <script src="../scripts/include.js"></script>
-<script src="../scripts/sidebar-menu.js"></script>
-<script src="../scripts/calls.js"></script>
-<script src="../scripts/components.js"></script>
-    <link rel="stylesheet" href="../styles/styles.css" />
-<link rel="stylesheet" href="../styles/pages.css" />
-<link rel="stylesheet" href="../styles/calls.css" />
-<link rel="stylesheet" href="../styles/sidebar-menu.css" />
+    <script src="../scripts/include.js"></script>
+    <script src="../scripts/calls.js"></script>
+
 
 </body>
 </html>
