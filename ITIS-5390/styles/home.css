@@ -55,7 +55,7 @@ body {
 .home-container {
     position: fixed;
     top: 48px;
-    left: 0;
+    left: 48px;
     right: 0;
     bottom: 0;
     display: flex;
