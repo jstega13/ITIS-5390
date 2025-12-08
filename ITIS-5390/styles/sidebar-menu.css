@@ -128,3 +128,147 @@
 .status-label {
     font-weight: 400;
 }
+
+/* Location Options */
+.location-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--teams-text);
+    transition: background-color 0.15s;
+}
+
+.location-option:hover {
+    background-color: #f3f2f1;
+}
+
+.location-option .status-label {
+    margin-left: 0; /* Align text with status buttons */
+    font-weight: 400;
+}
+
+/* Mood Input */
+.mood-wrapper {
+    padding: 8px 16px;
+}
+
+#mood-input {
+    width: 100%;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #e1dfdd;
+    outline: none;
+    color: var(--teams-text);
+    background-color: #fff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#mood-input:focus {
+    border-color: #6264a7;
+    box-shadow: 0 0 0 2px rgba(98, 100, 167, 0.2);
+}
+
+/* Profile Header Layout */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+    padding: 8px;
+}
+
+/* Top row: avatar + info */
+.profile-top-row {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* space between avatar and info */
+}
+
+/* Keep avatar wrapper */
+.profile-avatar-wrapper {
+    flex-shrink: 0;
+}
+
+/* Profile info column */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Location & Mood full width below top row */
+.profile-additional-info {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+    width: 100%; /* span the full width */
+}
+
+/* Optional: make location & mood each flex 1 to spread evenly */
+.profile-location,
+.profile-mood {
+    flex: 1;
+}
+
+/* Keep avatar button styles from before */
+.user-avatar-btn {
+    width: 60px; /* slightly bigger for popup */
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    position: relative;
+}
+
+/* Avatar image */
+.user-avatar-btn img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Profile Info Column */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Name */
+.profile-name {
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+/* Email */
+.profile-email {
+    font-size: 12px;
+    color: var(--teams-gray);
+    margin-bottom: 2px;
+}
+
+/* Account Link */
+.profile-account a {
+    font-size: 12px;
+    color: var(--teams-blue);
+    text-decoration: none;
+}
+
+.profile-account a:hover {
+    text-decoration: underline;
+}
+
