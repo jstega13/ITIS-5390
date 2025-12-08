@@ -158,15 +158,24 @@
             const statusPopup = document.getElementById('status-popup-menu');
             const statusIndicator = document.getElementById('user-status-indicator');
             const statusOptions = document.querySelectorAll('.status-option');
+            const locationOptions = document.querySelectorAll('.location-option');
+            const moodInput = document.getElementById('mood-input');
+            const profileLocation = document.getElementById('profile-location');
+            const profileMood = document.getElementById('profile-mood');
 
+            
             if (!avatarBtn || !statusPopup || !statusIndicator) {
                 console.log('Status elements not found');
                 return;
             }
 
             // Load saved status from localStorage or default to 'available'
-            let currentStatus = localStorage.getItem('userStatus') || 'available';
+            let currentStatus   = localStorage.getItem('userStatus')   || 'available';
+            let currentLocation = localStorage.getItem('userLocation') || 'In office';
+            let currentMood     = localStorage.getItem('userMood')     || 'Feeling good!';
             updateStatusIndicator(currentStatus);
+            updateProfileText(currentLocation, currentMood);
+            if (moodInput) moodInput.value = currentMood;
 
             // Toggle popup when avatar is clicked
             avatarBtn.addEventListener('click', function(e) {
@@ -190,6 +199,29 @@
                     console.log('Status changed to:', status);
                 });
             });
+            // Handle location option clicks
+            locationOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const location = this.textContent.trim();
+                    currentLocation = location;
+
+                    localStorage.setItem('userLocation', location);
+                    updateProfileText(currentLocation, currentMood);
+
+                    statusPopup.style.display = 'none';
+                });
+            });
+            // Handle mood input changes
+            if (moodInput) {
+                moodInput.addEventListener('input', function() {
+                    currentMood = moodInput.value;
+                    localStorage.setItem('userMood', currentMood);
+                    updateProfileText(currentLocation, currentMood);
+                });
+            }
 
             // Close popup when clicking outside
             document.addEventListener('click', function(e) {
@@ -197,6 +229,11 @@
                     statusPopup.style.display = 'none';
                 }
             });
+
+            function updateProfileText(location, mood) {
+                if (profileLocation) profileLocation.textContent = location;
+                if (profileMood) profileMood.textContent = mood;
+            }
 
             function updateStatusIndicator(status) {
                 if (!statusIndicator) return;

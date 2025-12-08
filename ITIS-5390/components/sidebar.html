@@ -43,6 +43,19 @@
     
     <!-- Status Popup Menu -->
     <div class="status-popup-menu" id="status-popup-menu" style="display: none;">
+        <div class="profile-header">
+            <button class="user-avatar-btn" style="cursor: default;">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=6264a7&color=fff&size=120" alt="User" id="user-avatar-img">
+                <span class="user-status-indicator" id="user-status-indicator"></span>
+            </button>        
+            <div class="profile-info">
+                <div class="profile-name">John Doe</div>
+                <div class="profile-location" id="profile-location"></div>
+                <div class="profile-mood" id="profile-mood"></div>
+                <div class="profile-email">john.doe@microsoft.com</div>
+                <div class="profile-account"><a href="settings.html">My account</a></div>
+            </div>
+        </div>
         <div class="status-popup-header">Set your status</div>
         <button class="status-option" data-status="available">
             <span class="status-dot status-available"></span>
@@ -60,10 +73,26 @@
             <span class="status-dot status-offline"></span>
             <span class="status-label">Offline</span>
         </button>
+        <div class="status-popup-header">Set your Location</div>
+        <button class="location-option" data-location="In Office">
+            <span class="status-label">In Office</span>
+        </button>
+        <button class="location-option" data-location="Remote">
+            <span class="status-label">Remote</span>
+        </button>
+        <button class="location-option" data-location="On Break">
+            <span class="status-label">On Break</span>
+        </button>
+        <button class="location-option" data-location="Out Today">
+            <span class="status-label">Out Today</span>
+        </button>
+
+        <div class="status-popup-header">Set your Mood</div>
+        <div class="mood-wrapper">
+            <input id="mood-input" class="status-label" placeholder="Input your mood here">
+        </div>
     </div>
 </div>
 <link rel="stylesheet" href="../styles/sidebar-menu.css">
-
-
 </nav>
 
